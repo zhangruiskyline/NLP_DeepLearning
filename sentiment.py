@@ -123,7 +123,7 @@ print ("Classification rate:", model.score(Xtest, Ytest))
 # let's look at the weights for each word
 # try it with different threshold values!
 threshold = 0.5
-for word, index in word_index_map.iteritems():
+for word, index in word_index_map.items():
     weight = model.coef_[0][index]
     if weight > threshold or weight < -threshold:
         print (word, weight)

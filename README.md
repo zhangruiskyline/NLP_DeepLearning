@@ -23,7 +23,17 @@ tokens = [t for t in tokens if t not in stopwords]
 ```
 
 ## nltk download
-need to download nltk package besides just install it
+need to download nltk package besides just install it, based on the run time error, install the missing 
+```python
+# First start ipython or python terminal
+import nltk
+nltk.download()
+```
+this command will start the GUI for NLTK package download, select the missing ones
 
+
+# Python 3 change
+
+1. use dict.items() instead of dict.iteritems()
 
 
