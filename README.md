@@ -1,8 +1,9 @@
 # NLP_demo
 
 # Start Trial 
-[Parts-of-speech.Info](http://parts-of-speech.info)
-[Stanford parser](http://nlp.stanford.edu:8080/parser/index.jsp)
+  1. [Parts-of-speech.Info](http://parts-of-speech.info)
+
+  2. [Stanford parser](http://nlp.stanford.edu:8080/parser/index.jsp)
 
 # Project 1: Spam detector
 
@@ -34,6 +35,8 @@ this command will start the GUI for NLTK package download, select the missing on
 
 # Python 3 change
 
-1. use dict.items() instead of dict.iteritems()
+>use dict.items() instead of dict.iteritems()
+
+
 
 

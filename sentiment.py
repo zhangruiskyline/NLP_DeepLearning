@@ -77,7 +77,8 @@ for review in negative_reviews:
             word_index_map[token] = current_index
             current_index += 1
 
-
+print(positive_tokenized)
+print(negative_tokenized)
 # now let's create our input matrices
 def tokens_to_vector(tokens, label):
     x = np.zeros(len(word_index_map) + 1) # last element is for the label
