@@ -117,7 +117,7 @@ Ytest = Y[-100:,]
 
 model = LogisticRegression()
 model.fit(Xtrain, Ytrain)
-print "Classification rate:", model.score(Xtest, Ytest)
+print ("Classification rate:", model.score(Xtest, Ytest))
 
 
 # let's look at the weights for each word
@@ -126,4 +126,4 @@ threshold = 0.5
 for word, index in word_index_map.iteritems():
     weight = model.coef_[0][index]
     if weight > threshold or weight < -threshold:
-        print word, weight
+        print (word, weight)
