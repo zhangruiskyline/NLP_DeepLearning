@@ -170,6 +170,7 @@ we can assigne latent variables such as
   > removing information != decreasing predictive probablity
   
   > denosing/ smooth / improving generilization 
+
 ### SVD
 
 SVD just dose both PCAs on same time on **X^TX** and **XX^T**
