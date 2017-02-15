@@ -182,6 +182,26 @@ like book titles have something 3rd edition
 tokens = [t for t in tokens if not any(c.isdigit() for c in t)] # remove any digits, i.e. "3rd edition"
 ```
 
+# Deep Learning NLP
+
+## Dataset
+Dataset: [wiki dump data](https://dumps.wikimedia.org)
+
+Convert from XML to txt:
+[wiki xml to txt](https://github.com/yohasebe/wp2txt)
+```shell
+$ gem install wp2txt
+wp2txt -i <filename>
+```
+### Pos Tag dataset
+For Pos Tag, use the dataset: 
+[Chunk dataset](http://www.cnts.ua.ac.be/conll2000/chunking/)
+
+### NER dataset
+[twitter ner](https://github.com/aritter/twitter_nlp/tree/master/data/annotated)
+
+###sentiment analysis
+[stanford NLP](http://nlp.stanford.edu/sentiment/)
 
 
 # Python 3 change
