@@ -196,3 +196,38 @@ f.close()
 #can use it any time you want:
 tnt_tagger.tag(nltk.word_tokenize("this is a tnt treebank tnt tagger"))
 ```
+
+# Part 4: Stemming and Lemmatization
+
+Stemming and Lemmatization are the basic text processing methods for English text. 
+The goal of both stemming and lemmatization is to reduce inflectional forms and sometimes derivationally related forms of a word to a common base form. 
+Here is the definition from wikipedia for stemming and lemmatization:
+
+## Stemmer in NLTK
+NLTK provides several famous stemmers interfaces, such as 
+Porter stemmer, Lancaster Stemmer, Snowball Stemmer and etc. In NLTK, using those stemmers is very simple.
+
+For Porter Stemmer, which is based on The Porter Stemming Algorithm, can be used like this:
+
+## How to use Lemmatizer in NLTK
+The NLTK Lemmatization method is based on WordNet’s built-in morphy function. 
+You would note that the “are” and “is” lemmatize results are not “be”, 
+that’s because the lemmatize method default pos argument is “n”: we can change to
+
+```
+lemmatize(word, pos=’n’)
+```
+
+Examples can be found in [stemming-and-lemmatization](http://textminingonline.com/dive-into-nltk-part-iv-stemming-and-lemmatization)
+
+# Part 5 Using Stanford Text Analysis Tools in Python
+NLTK now provides three interfaces for 
+[Stanford Part-Of-Speech Tagger (POS)](http://nlp.stanford.edu/software/tagger.shtml), 
+[Stanford Named Entity Recognizer (NER)](http://nlp.stanford.edu/software/CRF-NER.shtml) and 
+[Stanford Parser](http://nlp.stanford.edu/software/lex-parser.shtml)
+
+## POS Tagger
+
+## NER
+
+##Parser

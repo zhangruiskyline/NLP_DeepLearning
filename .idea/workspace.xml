@@ -36,9 +36,9 @@
       <file leaf-file-name="NLTK_Dive.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/NLTK_Dive.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="165">
-                <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="299">
+                <caret line="232" column="8" lean-forward="false" selection-start-line="232" selection-start-column="8" selection-end-line="232" selection-end-column="8" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -601,9 +601,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/NLTK_Dive.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="165">
-            <caret line="122" column="0" lean-forward="true" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="299">
+            <caret line="232" column="8" lean-forward="false" selection-start-line="232" selection-start-column="8" selection-end-line="232" selection-end-column="8" />
             <folding />
           </first_editor>
           <second_editor />
