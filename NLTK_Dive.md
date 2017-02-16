@@ -225,6 +225,7 @@ NLTK now provides three interfaces for
 [Stanford Part-Of-Speech Tagger (POS)](http://nlp.stanford.edu/software/tagger.shtml), 
 [Stanford Named Entity Recognizer (NER)](http://nlp.stanford.edu/software/CRF-NER.shtml) and 
 [Stanford Parser](http://nlp.stanford.edu/software/lex-parser.shtml)
+[Stanford Word Segmenter](http://nlp.stanford.edu/software/segmenter.shtml)
 
 ## POS Tagger
 Stanford POS Tagger official site provides two versions of POS Tagger:
@@ -323,5 +324,16 @@ os.environ['STANFORD_PARSER'] = "/Users/ruizhang/Documents/stanford-parser-full-
 english_parser = StanfordParser(os.environ['STANFORD_PARSER'] + 'stanford-parser.jar', os.environ['STANFORD_PARSER'] + 'stanford-parser-3.7.0-models.jar')
 english_parser.raw_parse_sents(("this is the english parser test”, “the parser is from stanford parser"))
 #Out:
+```
 
+## Stanford Word Segmenter
+* download [Stanford Word Segmenter](http://nlp.stanford.edu/software/segmenter.shtml#Download)
+* Python interface:
+```python
+from nltk.tokenize.stanford_segmenter import StanfordSegmenter
+segmenter = StanfordSegmenter(path_to_jar=sg+"/stanford-segmenter-3.7.0.jar", path_to_slf4j='/Users/ruizhang/Documents/slf4j-1.7.23/slf4j-log4j12-1.7.23.jar',path_to_sihan_corpora_dict=sg+"/data", path_to_model=sg+"/data/pku.gz", path_to_dict=sg+"/data/dict-chris6.ser.gz")
+sentence = u"这是中文分词测试"
+segmenter.segment(sentence)
+#Out: 
+'这 是 中文 分词 测试\n'
 ```
