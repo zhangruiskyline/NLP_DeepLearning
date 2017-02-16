@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6e72201-0c3e-4611-85a8-4fb9fafd66dc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NLTK_Dive.md" afterPath="$PROJECT_DIR$/NLTK_Dive.md" />
-    </list>
+    <list default="true" id="e6e72201-0c3e-4611-85a8-4fb9fafd66dc" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
