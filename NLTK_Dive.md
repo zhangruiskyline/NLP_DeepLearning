@@ -227,6 +227,22 @@ NLTK now provides three interfaces for
 [Stanford Parser](http://nlp.stanford.edu/software/lex-parser.shtml)
 
 ## POS Tagger
+e Stanford POS Tagger official site provides two versions of POS Tagger:
+
+[Download basic English Stanford Tagger version 3.4.1](http://nlp.stanford.edu/software/stanford-postagger-2014-08-27.zip)
+[Download full Stanford Tagger version 3.4.1](http://nlp.stanford.edu/software/stanford-postagger-full-2014-08-27.zip)
+
+We suggest you download the full version which contains a lot of models.
+After downloading the full version, unzip it and copy the related data in our test directory:
+```
+mkdir postagger
+cd postagger/
+cp ../stanford-postagger-full-2014-08-27/stanford-postagger.jar .
+cp -r ../stanford-postagger-full-2014-08-27/models .
+ipython –pylab
+```
+we can test this via ipython:
+
 
 ## NER
 
