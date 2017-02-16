@@ -222,10 +222,10 @@ Examples can be found in [stemming-and-lemmatization](http://textminingonline.co
 
 # Part 5 Using Stanford Text Analysis Tools in Python
 NLTK now provides three interfaces for 
-[Stanford Part-Of-Speech Tagger (POS)](http://nlp.stanford.edu/software/tagger.shtml), 
-[Stanford Named Entity Recognizer (NER)](http://nlp.stanford.edu/software/CRF-NER.shtml) and 
-[Stanford Parser](http://nlp.stanford.edu/software/lex-parser.shtml)
-[Stanford Word Segmenter](http://nlp.stanford.edu/software/segmenter.shtml)
+  * [Stanford Part-Of-Speech Tagger (POS)](http://nlp.stanford.edu/software/tagger.shtml)
+  * [Stanford Named Entity Recognizer (NER)](http://nlp.stanford.edu/software/CRF-NER.shtml)  
+  * [Stanford Parser](http://nlp.stanford.edu/software/lex-parser.shtml)
+  * [Stanford Segmenter](http://nlp.stanford.edu/software/segmenter.shtml)
 
 ## POS Tagger
 Stanford POS Tagger official site provides two versions of POS Tagger:
