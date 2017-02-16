@@ -120,3 +120,78 @@ word_punct_tokenizer.tokenize("This’s a test")
 ['This', '’', 's', 'a', 'test']
 
 ```
+
+# Part 3: Part-Of-Speech Tagging and POS Tagger
+Part-of-speech tagging is one of the most important text analysis tasks used to classify words 
+into their part-of-speech and label them according the tagset which is a collection of tags used for the pos tagging. 
+Part-of-speech tagging also known as word classes or lexical categories.
+
+```python
+import nltk
+text = nltk.word_tokenize("Dive into NLTK: Part-of-speech tagging and POS Tagger")
+nltk.pos_tag(text)
+[('Dive', 'NNP'),
+ ('into', 'IN'),
+ ('NLTK', 'NNP'),
+ (':', ':'),
+ ('Part-of-speech', 'JJ'),
+ ('tagging', 'NN'),
+ ('and', 'CC'),
+ ('POS', 'NNP'),
+ ('Tagger', 'NNP')]
+```
+NLTK provides documentation for each tag, which can be queried using the tag, e.g., 
+nltk.help.upenn_tagset(‘RB’), or a regular expression, e.g., nltk.help.upenn_brown_tagset(‘NN.*’):
+[pos tag link](http://textanalysisonline.com/nltk-pos-tagging)
+
+The default pos tagger model using in NLTK is maxent_treebanck_pos_tagger model, 
+you can find the code in *nltk-master/nltk/tag/__init__.py*
+
+You can find the pre-trained POS Tagging Model in __nltk_data/taggers__
+
+How to train a POS Tagging Model or POS Tagger in NLTK
+You have used the maxent treebank pos tagging model in NLTK by default, 
+and NLTK provides not only the maxent pos tagger, but other pos taggers 
+like crf, hmm, brill, tnt and interfaces with stanford pos tagger, hunpos pos tagger and senna postaggers
+
+```
+-rwxr-xr-x@ 4.4K 7 22 2013 __init__.py
+-rwxr-xr-x@ 2.9K 7 22 2013 api.py
+-rwxr-xr-x@ 56K 7 22 2013 brill.py
+-rwxr-xr-x@ 31K 7 22 2013 crf.py
+-rwxr-xr-x@ 48K 7 22 2013 hmm.py
+-rwxr-xr-x@ 5.1K 7 22 2013 hunpos.py
+-rwxr-xr-x@ 11K 7 22 2013 senna.py
+-rwxr-xr-x@ 26K 7 22 2013 sequential.py
+-rwxr-xr-x@ 3.3K 7 22 2013 simplify.py
+-rwxr-xr-x@ 6.4K 7 22 2013 stanford.py
+-rwxr-xr-x@ 18K 7 22 2013 tnt.py
+-rwxr-xr-x@ 2.3K 7 22 2013 util.py
+```
+
+## Example to train TnT POS Tagger Model
+```python
+from nltk.corpus import treebank
+len(treebank.tagged_sents())
+train_data = treebank.tagged_sents()[:3000]
+test_data = treebank.tagged_sents()[3000:]
+
+'''
+We use the first 3000 treebank tagged sentences as the train_data, and last 914 tagged sentences as the test_data, 
+now we train TnT POS Tagger by the train_data and evaluate it by the test_data:
+'''
+
+from nltk.tag import tnt
+tnt_pos_tagger = tnt.TnT()
+tnt_pos_tagger.train(train_data)
+tnt_pos_tagger.evaluate(test_data)
+
+## we can save
+import pickle
+f = open('tnt_treebank_pos_tagger.pickle', 'w')
+pickle.dump(tnt_pos_tagger, f)
+f.close()
+
+#can use it any time you want:
+tnt_tagger.tag(nltk.word_tokenize("this is a tnt treebank tnt tagger"))
+```
