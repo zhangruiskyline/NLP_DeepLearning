@@ -227,23 +227,53 @@ NLTK now provides three interfaces for
 [Stanford Parser](http://nlp.stanford.edu/software/lex-parser.shtml)
 
 ## POS Tagger
-e Stanford POS Tagger official site provides two versions of POS Tagger:
-
-[Download basic English Stanford Tagger version 3.4.1](http://nlp.stanford.edu/software/stanford-postagger-2014-08-27.zip)
-[Download full Stanford Tagger version 3.4.1](http://nlp.stanford.edu/software/stanford-postagger-full-2014-08-27.zip)
-
+Stanford POS Tagger official site provides two versions of POS Tagger:
 We suggest you download the full version which contains a lot of models.
 After downloading the full version, unzip it and copy the related data in our test directory:
+```python
+import os
+##set OS path to Stanford NLP
+os.environ['STANFORD_POSTAGGER'] = "/Users/ruizhang/Documents/stanford-postagger-full-2016-10-31"
+from nltk.tag.stanford import StanfordPOSTagger
+english_postagger = StanfordPOSTagger(os.environ['STANFORD_POSTAGGER'] +'/models/english-bidirectional-distsim.tagger',os.environ['STANFORD_POSTAGGER']+'/stanford-postagger.jar')
+english_postagger.tag('this is stanford postagger in nltk for python users'.split())
+#Out: 
+[('this', 'DT'),
+ ('is', 'VBZ'),
+ ('stanford', 'JJ'),
+ ('postagger', 'NN'),
+ ('in', 'IN'),
+ ('nltk', 'NN'),
+ ('for', 'IN'),
+ ('python', 'NN'),
+ ('users', 'NNS')]
+ 
+## And it supports multiple languages
+chinese_postagger = StanfordPOSTagger(os.environ['STANFORD_POSTAGGER'] +'/models/chinese-distsim.tagger',os.environ['STANFORD_POSTAGGER']+'/stanford-postagger.jar',encoding='utf-8')
+chinese_postagger.tag('这 是 在 Python 环境 中 使用 斯坦福 词性 标 器'.split())
+#Out:
+[('', '这#PN'),
+ ('', '是#VC'),
+ ('', '在#P'),
+ ('', 'Python#NN'),
+ ('', '环境#NN'),
+ ('', '中#LC'),
+ ('', '使用#VV'),
+ ('', '斯坦福#NR'),
+ ('', '词性#JJ'),
+ ('', '标#NN'),
+ ('', '器#NN')]
 ```
-mkdir postagger
-cd postagger/
-cp ../stanford-postagger-full-2014-08-27/stanford-postagger.jar .
-cp -r ../stanford-postagger-full-2014-08-27/models .
-ipython –pylab
-```
-we can test this via ipython:
-
+The models contains a lot of pos tagger models, you can find the details info from the README-Models.txt
 
 ## NER
+Named Entity Recognition (NER) labels sequences of words in a text which are the names of things, 
+such as person and company names, or gene and protein names. It comes with well-engineered feature extractors for Named Entity Recognition, 
+and many options for defining feature extractors. Included with the download are good named entity recognizers for English,
+particularly for the 3 classes (PERSON, ORGANIZATION, LOCATION), and we also make available on this page various other models for different languages and circumstances,
+including models trained on just the CoNLL 2003 English training data. The distributional similarity features in some models improve performance 
+but the models require considerably more memory.
+
+  * first step is to download NER from official website[Stanford NER](http://nlp.stanford.edu/software/CRF-NER.shtml#Download)
 
 ##Parser
