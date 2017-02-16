@@ -55,7 +55,8 @@ tokens = word_tokenize(text)
 tagged_tokens = pos_tag(tokens)
 ```
 
-# Part 3: Sentence Tokenize and Word Tokenize
+# Part 2: Sentence Tokenize and Word Tokenize
+
 ##sentence token
 sent_tokenize uses an instance of PunktSentenceTokenizer from the nltk. 
 tokenize.punkt module. This instance has already been trained on and works well for many European languages. 
@@ -118,7 +119,6 @@ word_punct_tokenizer = WordPunctTokenizer()
 word_punct_tokenizer.tokenize("This’s a test")
 #Out
 ['This', '’', 's', 'a', 'test']
-
 ```
 
 # Part 3: Part-Of-Speech Tagging and POS Tagger
