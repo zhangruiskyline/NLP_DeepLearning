@@ -232,7 +232,7 @@ We suggest you download the full version which contains a lot of models.
 After downloading the full version, unzip it and copy the related data in our test directory:
 ```python
 import os
-##set OS path to Stanford NLP
+##set OS path to Stanford postagger
 os.environ['STANFORD_POSTAGGER'] = "/Users/ruizhang/Documents/stanford-postagger-full-2016-10-31"
 from nltk.tag.stanford import StanfordPOSTagger
 english_postagger = StanfordPOSTagger(os.environ['STANFORD_POSTAGGER'] +'/models/english-bidirectional-distsim.tagger',os.environ['STANFORD_POSTAGGER']+'/stanford-postagger.jar')
@@ -274,6 +274,54 @@ particularly for the 3 classes (PERSON, ORGANIZATION, LOCATION), and we also mak
 including models trained on just the CoNLL 2003 English training data. The distributional similarity features in some models improve performance 
 but the models require considerably more memory.
 
-  * first step is to download NER from official website[Stanford NER](http://nlp.stanford.edu/software/CRF-NER.shtml#Download)
+  * First step is to download NER from official website [Stanford NER](http://nlp.stanford.edu/software/CRF-NER.shtml#Download)
+  * Use it similar in python
+```python
+import os
+from nltk.tag.stanford import StanfordNERTagger
+os.environ['STANFORD_NER'] = "/Users/ruizhang/Documents/stanford-ner-2016-10-31"
+english_nertagger = StanfordNERTagger(os.environ['STANFORD_NER']+'/classifiers/english.all.3class.distsim.crf.ser.gz', os.environ['STANFORD_NER']+'/stanford-ner.jar')
+english_nertagger.tag('Rui Zhang is working in San Francisco Bay Area in Broadcom as a software engineer'.split())
+#Out[61]
+[('Rui', 'PERSON'),
+ ('Zhang', 'PERSON'),
+ ('is', 'O'),
+ ('working', 'O'),
+ ('in', 'O'),
+ ('San', 'LOCATION'),
+ ('Francisco', 'LOCATION'),
+ ('Bay', 'LOCATION'),
+ ('Area', 'LOCATION'),
+ ('in', 'O'),
+ ('Broadcom', 'ORGANIZATION'),
+ ('as', 'O'),
+ ('a', 'O'),
+ ('software', 'O'),
+ ('engineer', 'O')]
+```
+The Models Included with Stanford NER are a 4 class model trained for CoNLL, a 7 class model trained for MUC, and a 3 class model trained on both data sets for the intersection of those class sets.
+
+ >3 class:	Location, Person, Organization
+ >4 class:	Location, Person, Organization, Misc
+ >7 class:	Time, Location, Organization, Person, Money, Percent, Date
+
+You can test the 7 class Stanford NER on  [Text Analysis Online Demo](http://textanalysisonline.com)
 
 ##Parser
+A natural language parser is a program that works out the grammatical structure of sentences, for instance,
+which groups of words go together (as “phrases”) and which words are the subject or object of a verb. 
+Probabilistic parsers use knowledge of language gained from hand-parsed sentences to try to produce the most likely analysis of new sentences. 
+These statistical parsers still make some mistakes, 
+but commonly work rather well. Their development was one of the biggest breakthroughs in natural language processing in the 1990s.
+
+  * First step is to download parser from official website [Stanford parser](http://nlp.stanford.edu/software/lex-parser.shtml#Download)
+  * Use it similar in python
+```python
+import os
+from nltk.parse.stanford import StanfordParser
+os.environ['STANFORD_PARSER'] = "/Users/ruizhang/Documents/stanford-parser-full-2016-10-31"
+english_parser = StanfordParser(os.environ['STANFORD_PARSER'] + 'stanford-parser.jar', os.environ['STANFORD_PARSER'] + 'stanford-parser-3.7.0-models.jar')
+english_parser.raw_parse_sents(("this is the english parser test”, “the parser is from stanford parser"))
+#Out:
+
+```
