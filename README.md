@@ -186,9 +186,9 @@ tokens = [t for t in tokens if not any(c.isdigit() for c in t)] # remove any dig
 #Word2vec
 
 ## The Skip-Gram Model
- >Goal: We’re going to train the neural network to do the following. Given a specific word in the middle of a sentence (the input word), 
- look at the words nearby and pick one at random. The network is going to tell us the probability for every word in 
- our vocabulary of being the “nearby word” that we chose.
+Goal: We’re going to train the neural network to do the following. Given a specific word in the middle of a sentence (the input word), 
+look at the words nearby and pick one at random. The network is going to tell us the probability for every word in 
+our vocabulary of being the “nearby word” that we chose.
  
 We’ll train the neural network to do this by feeding it word pairs found in our training documents. 
 The below example shows some of the training samples (word pairs) we would take from the sentence 
@@ -196,7 +196,7 @@ The below example shows some of the training samples (word pairs) we would take 
 The word highlighted in blue is the input word.
 
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/training_data.png "word pair train"
 
 If two different words have very similar “contexts” (that is, what words are likely to appear around them), 
 then our model needs to output very similar results for these two words. And one way for the network to output similar 
