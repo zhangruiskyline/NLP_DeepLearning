@@ -194,8 +194,7 @@ We’ll train the neural network to do this by feeding it word pairs found in ou
 The below example shows some of the training samples (word pairs) we would take from the sentence 
 “The quick brown fox jumps over the lazy dog.” I’ve used a small window size of 2 just for the example. 
 The word highlighted in blue is the input word.
-
-
+![alt text][logo]
 [logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/training_data.png "word pair train"
 
 If two different words have very similar “contexts” (that is, what words are likely to appear around them), 
