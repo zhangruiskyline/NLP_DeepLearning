@@ -185,6 +185,8 @@ tokens = [t for t in tokens if not any(c.isdigit() for c in t)] # remove any dig
 ```
 #Word2vec
 
+referring to [Word2vec Tutorial](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+
 ## The Skip-Gram Model
 Goal: We’re going to train the neural network to do the following. Given a specific word in the middle of a sentence (the input word), 
 look at the words nearby and pick one at random. The network is going to tell us the probability for every word in 
@@ -205,6 +207,67 @@ then our network is motivated to learn similar word vectors for these two words!
 And what does it mean for two words to have similar contexts? I think you could expect that synonyms 
 like “intelligent” and “smart” would have very similar contexts. Or that words that are related, 
 like “engine” and “transmission”, would probably have similar contexts as well.
+
+##Model Details
+let’s say we have a vocabulary of 10,000 unique words.
+We’re going to represent an input word like “ants” as a one-hot vector. This vector will have 10,000 components (one for every word in our vocabulary) 
+and we’ll place a “1” in the position corresponding to the word “ants”, and 0s in all of the other positions.
+
+The output of the network is a single vector (also with 10,000 components) containing, for every word in our vocabulary, 
+the probability that a randomly selected nearby word is that vocabulary word.
+![alt text][logo]
+[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_net_arch.png "Network structure"
+
+When training this network on word pairs, the input is a one-hot vector representing the input word and 
+the training output is also a one-hot vector representing the output word. 
+But when you evaluate the trained network on an input word, the output vector will actually be a probability distribution 
+(i.e., a bunch of floating point values, not a one-hot vector).
+
+## Hidden layer
+For our example, we’re going to say that we’re learning word vectors with 300 features. 
+So the hidden layer is going to be represented by a weight matrix with 10,000 rows 
+(one for every word in our vocabulary) and 300 columns (one for every hidden neuron).
+
+If you look at the rows of this weight matrix, these are actually what will be our *word vectors*!
+![alt text][logo]
+[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png "Word Vector Lookup table"
+
+> So the end goal of all of this is really just to learn this hidden layer weight matrix – 
+the output layer we’ll just toss when we’re done!
+
+we can take a look at this in another way:
+ If you multiply a 1 x 10,000 one-hot vector by a 10,000 x 300 matrix, 
+ it will effectively just select the matrix row corresponding to the “1”. Here’s a small example to give you a visual.
+ ![alt text][logo]
+[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png "One hot vector x hidden word2vec"
+
+This means that the hidden layer of this model is really just operating as a lookup table. 
+The output of the hidden layer is just the “word vector” for the input word.
+![alt text][logo]
+[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png "example to use word2vec"
+
+##Output
+The __*1 x 300*__ word vector for “ants” then gets fed to the output layer. 
+The output layer is a softmax regression classifier. 
+but the gist of it is that each output neuron (one per word in our vocabulary!) 
+will produce an output between 0 and 1, and the sum of all these output values will add up to 1.
+Specifically, each output neuron has a weight vector which it multiplies against the word vector from the hidden layer, 
+then it applies the function __*exp(x)*__ to the result. Finally, in order to get the outputs to sum up to 1, 
+we divide this result by the sum of the results from all 10,000 output nodes.
+
+![alt text][logo]
+[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png
+
+##Intuition
+
+If two different words have very similar “contexts” (that is, what words are likely to appear around them), then our model needs to output very similar results for these two words. 
+And one way for the network to output similar context predictions for these two words is if the word vectors are similar.
+ So, if two words have similar contexts, then our network is motivated to learn similar word vectors for these two words! Ta da!
+
+And what does it mean for two words to have similar contexts? I think you could expect that synonyms like “intelligent” and “smart” would have very similar contexts. Or that words that are related, 
+like “engine” and “transmission”, would probably have similar contexts as well.
+Here’s an illustration of calculating the output of the output neuron for the word “car”.
+
 
 # Deep Learning NLP
 
