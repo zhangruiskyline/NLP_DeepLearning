@@ -196,8 +196,8 @@ We’ll train the neural network to do this by feeding it word pairs found in ou
 The below example shows some of the training samples (word pairs) we would take from the sentence 
 “The quick brown fox jumps over the lazy dog.” I’ve used a small window size of 2 just for the example. 
 The word highlighted in blue is the input word.
-![alt text][logo]
-[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/training_data.png "word pair train"
+![alt text][word_pair]
+[word_pair]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/training_data.png "word pair train"
 
 If two different words have very similar “contexts” (that is, what words are likely to appear around them), 
 then our model needs to output very similar results for these two words. And one way for the network to output similar 
@@ -215,8 +215,8 @@ and we’ll place a “1” in the position corresponding to the word “ants”
 
 The output of the network is a single vector (also with 10,000 components) containing, for every word in our vocabulary, 
 the probability that a randomly selected nearby word is that vocabulary word.
-![alt text][logo]
-[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_net_arch.png "Network structure"
+![alt text][NN_structure]
+[NN_structure]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_net_arch.png "Network structure"
 
 When training this network on word pairs, the input is a one-hot vector representing the input word and 
 the training output is also a one-hot vector representing the output word. 
@@ -229,8 +229,8 @@ So the hidden layer is going to be represented by a weight matrix with 10,000 ro
 (one for every word in our vocabulary) and 300 columns (one for every hidden neuron).
 
 If you look at the rows of this weight matrix, these are actually what will be our *word vectors*!
-![alt text][logo]
-[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png "Word Vector Lookup table"
+![alt text][word2vec]
+[word2vec]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png "Word Vector Lookup table"
 
 > So the end goal of all of this is really just to learn this hidden layer weight matrix – 
 the output layer we’ll just toss when we’re done!
@@ -238,13 +238,13 @@ the output layer we’ll just toss when we’re done!
 we can take a look at this in another way:
  If you multiply a 1 x 10,000 one-hot vector by a 10,000 x 300 matrix, 
  it will effectively just select the matrix row corresponding to the “1”. Here’s a small example to give you a visual.
- ![alt text][logo]
-[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png "One hot vector x hidden word2vec"
+ ![alt text][one_hot_example]
+[one_hot_example]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png "One hot vector x hidden word2vec"
 
 This means that the hidden layer of this model is really just operating as a lookup table. 
 The output of the hidden layer is just the “word vector” for the input word.
-![alt text][logo]
-[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png "example to use word2vec"
+![alt text][matrix]
+[matrix]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png "example to use word2vec"
 
 ##Output
 The __*1 x 300*__ word vector for “ants” then gets fed to the output layer. 
@@ -255,8 +255,8 @@ Specifically, each output neuron has a weight vector which it multiplies against
 then it applies the function __*exp(x)*__ to the result. Finally, in order to get the outputs to sum up to 1, 
 we divide this result by the sum of the results from all 10,000 output nodes.
 
-![alt text][logo]
-[logo]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png
+![alt text][out_weight]
+[out_weight]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png
 
 ##Intuition
 
