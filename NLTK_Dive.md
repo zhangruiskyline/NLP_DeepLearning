@@ -221,7 +221,7 @@ lemmatize(word, pos=’n’)
 Examples can be found in [stemming-and-lemmatization](http://textminingonline.com/dive-into-nltk-part-iv-stemming-and-lemmatization)
 
 # Part 5 Using Stanford Text Analysis Tools in Python
-NLTK now provides three interfaces for 
+NLTK now provides interfaces for 
   * [Stanford Part-Of-Speech Tagger (POS)](http://nlp.stanford.edu/software/tagger.shtml)
   * [Stanford Named Entity Recognizer (NER)](http://nlp.stanford.edu/software/CRF-NER.shtml)  
   * [Stanford Parser](http://nlp.stanford.edu/software/lex-parser.shtml)
@@ -337,3 +337,5 @@ segmenter.segment(sentence)
 #Out: 
 '这 是 中文 分词 测试\n'
 ```
+
+# Part 6:  Text Classification
