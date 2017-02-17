@@ -229,9 +229,6 @@ So the hidden layer is going to be represented by a weight matrix with 10,000 ro
 (one for every word in our vocabulary) and 300 columns (one for every hidden neuron).
 
 If you look at the rows of this weight matrix, these are actually what will be our *word vectors*!
-![alt text][word2vec]
-[word2vec]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png "Word Vector Lookup table"
-
 > So the end goal of all of this is really just to learn this hidden layer weight matrix – 
 the output layer we’ll just toss when we’re done!
 
