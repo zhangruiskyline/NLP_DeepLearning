@@ -195,6 +195,9 @@ The below example shows some of the training samples (word pairs) we would take 
 “The quick brown fox jumps over the lazy dog.” I’ve used a small window size of 2 just for the example. 
 The word highlighted in blue is the input word.
 
+
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+
 If two different words have very similar “contexts” (that is, what words are likely to appear around them), 
 then our model needs to output very similar results for these two words. And one way for the network to output similar 
 context predictions for these two words is if the word vectors are similar. So, if two words have similar contexts, 
