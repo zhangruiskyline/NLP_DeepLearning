@@ -29,7 +29,7 @@ def main():
         for i in sentence:
             A[i,j] += 1
         j += 1
-    print("finished getting raw counts")
+    # print("finished getting raw counts")
 
     transformer = TfidfTransformer()
     A = transformer.fit_transform(A)

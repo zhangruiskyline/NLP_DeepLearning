@@ -2,6 +2,7 @@
 # https://deeplearningcourses.com/c/natural-language-processing-with-deep-learning-in-python
 # https://udemy.com/natural-language-processing-with-deep-learning-in-python
 import numpy as np
+import future
 
 def init_weight(Mi, Mo):
     return np.random.randn(Mi, Mo) / np.sqrt(Mi + Mo)
@@ -28,8 +29,8 @@ def find_analogies(w1, w2, w3, We, word2idx):
                 if d < min_dist:
                     min_dist = d
                     best_word = word
-        print "closest match by", name, "distance:", best_word
-        print w1, "-", w2, "=", best_word, "-", w3
+        print ("closest match by", name, "distance:", best_word)
+        print (w1, "-", w2, "=", best_word, "-", w3)
 
 
 class Tree:
@@ -43,9 +44,9 @@ class Tree:
 def display_tree(t, lvl=0):
     prefix = ''.join(['>']*lvl)
     if t.word is not None:
-        print "%s%s %s" % (prefix, t.label, t.word)
+        print ("%s%s %s" % (prefix, t.label, t.word))
     else:
-        print "%s%s -" % (prefix, t.label)
+        print ("%s%s -" % (prefix, t.label))
         # if t.left is None or t.right is None:
         #     raise Exception("Tree node has no word but left and right child are None")
     if t.left:

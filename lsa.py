@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from nltk.stem import WordNetLemmatizer
 from sklearn.decomposition import TruncatedSVD
-
+from nltk.tokenize import word_tokenize
 
 wordnet_lemmatizer = WordNetLemmatizer()
 
@@ -25,7 +25,7 @@ stopwords = stopwords.union({
     'third', 'second', 'fourth', })
 def my_tokenizer(s):
     s = s.lower() # downcase
-    tokens = nltk.tokenize.word_tokenize(s) # split string into words (tokens)
+    tokens = word_tokenize(s) # split string into words (tokens)
     tokens = [t for t in tokens if len(t) > 2] # remove short words, they're probably not useful
     tokens = [wordnet_lemmatizer.lemmatize(t) for t in tokens] # put words into base form
     tokens = [t for t in tokens if t not in stopwords] # remove stopwords
@@ -42,9 +42,10 @@ all_titles = []
 index_word_map = []
 for title in titles:
     try:
-        title = title.encode('ascii', 'ignore') # this will throw exception if bad characters
+        # title = title.encode('ascii', 'ignore') # this will throw exception if bad characters
         all_titles.append(title)
         tokens = my_tokenizer(title)
+        # tokens = my_tokenizer(title)
         all_tokens.append(tokens)
         for token in tokens:
             if token not in word_index_map:
@@ -77,7 +78,7 @@ def main():
     svd = TruncatedSVD()
     Z = svd.fit_transform(X)
     plt.scatter(Z[:,0], Z[:,1])
-    for i in xrange(D):
+    for i in range(D):
         plt.annotate(s=index_word_map[i], xy=(Z[i,0], Z[i,1]))
     plt.show()
 

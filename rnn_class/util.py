@@ -1,5 +1,6 @@
 # https://deeplearningcourses.com/c/deep-learning-recurrent-neural-networks-in-python
 # https://udemy.com/deep-learning-recurrent-neural-networks-in-python
+import future
 import numpy as np
 import string
 import os
@@ -72,9 +73,9 @@ def my_tokenizer(s):
     return s.split()
 
 def get_wikipedia_data(n_files, n_vocab, by_paragraph=False):
-    prefix = '../large_files/'
+    prefix = '/Users/ruizhang/Documents/wiki_data/'
+    # input_files = [f for f in os.listdir(prefix) if f.startswith('enwiki') and f.endswith('txt')]
     input_files = [f for f in os.listdir(prefix) if f.startswith('enwiki') and f.endswith('txt')]
-
     # return variables
     sentences = []
     word2idx = {'START': 0, 'END': 1}
@@ -121,13 +122,13 @@ def get_wikipedia_data(n_files, n_vocab, by_paragraph=False):
     # let 'unknown' be the last token
     word2idx_small['UNKNOWN'] = new_idx 
     unknown = new_idx
-
-    assert('START' in word2idx_small)
-    assert('END' in word2idx_small)
-    assert('king' in word2idx_small)
-    assert('queen' in word2idx_small)
-    assert('man' in word2idx_small)
-    assert('woman' in word2idx_small)
+    #
+    # assert('START' in word2idx_small)
+    # assert('END' in word2idx_small)
+    # assert('king' in word2idx_small)
+    # assert('queen' in word2idx_small)
+    # assert('man' in word2idx_small)
+    # assert('woman' in word2idx_small)
 
     # map old idx to new idx
     sentences_small = []
