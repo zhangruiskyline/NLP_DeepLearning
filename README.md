@@ -12,7 +12,7 @@
 # project 2: sentiment analysis
 [sentiment data](https://www.cs.jhu.edu/~mdredze/datasets/sentiment/index2.html)
 
-# NLTK
+# Section 1 : NLTK
 
 A example for all usage:
 [textanalysis API](https://market.mashape.com/textanalysis/textanalysis#nltk-wordnet-word-lemmatizer)
@@ -148,7 +148,7 @@ tags = nltk.pos_tag(s.split())
 nltk.ne_chunk(tags)
 ```
 
-# Latent Semantic Analysis(LSA)
+# Section 2: Latent Semantic Analysis(LSA)
   * synonym: 
     * Used for multiple words have same meaning. 
     Example:"buy" and "purchase", "big" and "large" "quick" and "speed"
@@ -184,7 +184,7 @@ like book titles have something 3rd edition
 tokens = [t for t in tokens if not any(c.isdigit() for c in t)] # remove any digits, i.e. "3rd edition"
 ```
 
-# word embedding 
+# Section 3: Word embedding 
  > dimension reduction(like PCA)
  > Finding a high level representation of data
  > decorrelate: if 99% docuements that contains "car" also contains "vehicle", then we do not need two dimensions to represent
@@ -234,7 +234,7 @@ v0 = vec(king) - vec(man) + vec(woman)
 example: consider each paragraph a document(not sentence otherwise training time is too long)
 
 
-#Word2vec
+# Section 4: Word2vec
 
 referring to [Word2vec Tutorial](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
 
@@ -318,12 +318,177 @@ Here’s an illustration of calculating the output of the output neuron for the 
 
 ## Wordnet example
  > taxonomy like WordNet: hypernyms (is-a) relationships
+ 
+Another useful linke is [Tensorflow Word2vec](https://www.tensorflow.org/tutorials/word2vec)
 
 ```python
-from nltk.corpus import wordnet as wn
-panda = wn.sysset('pandan.n.01')
-hyper = lambda s:s.hypernyms()
-list(panda.closure(hyper))
+from gensim.models import word2vec
+import logging
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+sentences = word2vec.Text8Corpus('text8')
+#  text8 from http://mattmahoney.net/dc/text8.zip is wikipedia data: http://mattmahoney.net/dc/textdata.html see "Relationship of Wikipedia Text to Clean Text" 
+model = word2vec.Word2Vec(sentences, size=200)
+## will train the data
+2017-02-17 22:03:53,854 : INFO : collecting all words and their counts
+2017-02-17 22:03:53,860 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2017-02-17 22:04:00,626 : INFO : collected 253854 word types from a corpus of 17005207 raw words and 1701 sentences
+2017-02-17 22:04:00,626 : INFO : Loading a fresh vocabulary
+2017-02-17 22:04:00,884 : INFO : min_count=5 retains 71290 unique words (28% of original 253854, drops 182564)
+2017-02-17 22:04:00,884 : INFO : min_count=5 leaves 16718844 word corpus (98% of original 17005207, drops 286363)
+2017-02-17 22:04:01,114 : INFO : deleting the raw counts dictionary of 253854 items
+2017-02-17 22:04:01,137 : INFO : sample=0.001 downsamples 38 most-common words
+2017-02-17 22:04:01,137 : INFO : downsampling leaves estimated 12506280 word corpus (74.8% of prior 16718844)
+2017-02-17 22:04:01,137 : INFO : estimated required memory for 71290 words and 200 dimensions: 149709000 bytes
+2017-02-17 22:04:01,419 : INFO : resetting layer weights
+2017-02-17 22:04:02,553 : INFO : training model with 3 workers on 71290 vocabulary and 200 features, using sg=0 hs=0 sample=0.001 negative=5 window=5
+2017-02-17 22:04:02,553 : INFO : expecting 1701 sentences, matching count from corpus used for vocabulary survey
+2017-02-17 22:04:03,573 : INFO : PROGRESS: at 0.78% examples, 479620 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:04,590 : INFO : PROGRESS: at 1.69% examples, 517727 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:05,590 : INFO : PROGRESS: at 2.70% examples, 554621 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:06,593 : INFO : PROGRESS: at 3.57% examples, 551485 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:07,597 : INFO : PROGRESS: at 4.37% examples, 540852 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:08,601 : INFO : PROGRESS: at 5.34% examples, 551815 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:09,605 : INFO : PROGRESS: at 6.24% examples, 554666 words/s, in_qsize 4, out_qsize 1
+2017-02-17 22:04:10,616 : INFO : PROGRESS: at 7.22% examples, 561685 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:11,626 : INFO : PROGRESS: at 8.07% examples, 557540 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:12,628 : INFO : PROGRESS: at 8.90% examples, 554115 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:13,634 : INFO : PROGRESS: at 9.84% examples, 557206 words/s, in_qsize 4, out_qsize 1
+2017-02-17 22:04:14,646 : INFO : PROGRESS: at 10.83% examples, 561928 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:15,658 : INFO : PROGRESS: at 11.78% examples, 564115 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:16,665 : INFO : PROGRESS: at 12.78% examples, 568347 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:17,665 : INFO : PROGRESS: at 13.76% examples, 571182 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:18,688 : INFO : PROGRESS: at 14.74% examples, 573476 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:19,691 : INFO : PROGRESS: at 15.18% examples, 555156 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:20,706 : INFO : PROGRESS: at 15.57% examples, 537083 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:21,707 : INFO : PROGRESS: at 16.06% examples, 525068 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:22,720 : INFO : PROGRESS: at 16.55% examples, 513907 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:23,731 : INFO : PROGRESS: at 17.41% examples, 514751 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:04:24,731 : INFO : PROGRESS: at 18.42% examples, 519996 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:25,738 : INFO : PROGRESS: at 19.41% examples, 523912 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:26,746 : INFO : PROGRESS: at 20.34% examples, 526045 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:27,767 : INFO : PROGRESS: at 21.21% examples, 526090 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:28,772 : INFO : PROGRESS: at 22.15% examples, 528123 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:04:29,775 : INFO : PROGRESS: at 22.89% examples, 525641 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:30,852 : INFO : PROGRESS: at 23.49% examples, 518901 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:31,874 : INFO : PROGRESS: at 23.92% examples, 509793 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:32,960 : INFO : PROGRESS: at 24.47% examples, 502960 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:33,964 : INFO : PROGRESS: at 24.87% examples, 494989 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:34,981 : INFO : PROGRESS: at 25.30% examples, 487878 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:36,037 : INFO : PROGRESS: at 25.67% examples, 479400 words/s, in_qsize 5, out_qsize 1
+2017-02-17 22:04:37,045 : INFO : PROGRESS: at 26.41% examples, 478988 words/s, in_qsize 5, out_qsize 1
+2017-02-17 22:04:38,056 : INFO : PROGRESS: at 27.29% examples, 481082 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:39,067 : INFO : PROGRESS: at 28.22% examples, 483660 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:40,069 : INFO : PROGRESS: at 28.92% examples, 482576 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:41,069 : INFO : PROGRESS: at 29.45% examples, 478691 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:42,083 : INFO : PROGRESS: at 30.39% examples, 481336 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:43,085 : INFO : PROGRESS: at 31.39% examples, 484960 words/s, in_qsize 5, out_qsize 1
+2017-02-17 22:04:44,086 : INFO : PROGRESS: at 32.28% examples, 486604 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:45,101 : INFO : PROGRESS: at 33.19% examples, 488477 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:46,104 : INFO : PROGRESS: at 34.20% examples, 491820 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:47,144 : INFO : PROGRESS: at 35.09% examples, 492579 words/s, in_qsize 6, out_qsize 1
+2017-02-17 22:04:48,160 : INFO : PROGRESS: at 36.01% examples, 494100 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:49,161 : INFO : PROGRESS: at 37.00% examples, 496709 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:50,165 : INFO : PROGRESS: at 38.05% examples, 500044 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:51,175 : INFO : PROGRESS: at 38.93% examples, 500865 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:04:52,181 : INFO : PROGRESS: at 39.92% examples, 503116 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:53,210 : INFO : PROGRESS: at 40.58% examples, 501018 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:04:54,231 : INFO : PROGRESS: at 41.46% examples, 501596 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:55,239 : INFO : PROGRESS: at 42.46% examples, 503800 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:04:56,239 : INFO : PROGRESS: at 43.35% examples, 504796 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:04:57,246 : INFO : PROGRESS: at 44.28% examples, 506138 words/s, in_qsize 1, out_qsize 0
+2017-02-17 22:04:58,259 : INFO : PROGRESS: at 45.26% examples, 507978 words/s, in_qsize 4, out_qsize 1
+2017-02-17 22:04:59,270 : INFO : PROGRESS: at 46.27% examples, 510230 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:05:00,274 : INFO : PROGRESS: at 47.33% examples, 512956 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:05:01,274 : INFO : PROGRESS: at 48.37% examples, 515383 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:02,286 : INFO : PROGRESS: at 49.34% examples, 516802 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:03,287 : INFO : PROGRESS: at 50.25% examples, 517756 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:04,288 : INFO : PROGRESS: at 51.01% examples, 517036 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:05,294 : INFO : PROGRESS: at 51.84% examples, 517085 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:06,298 : INFO : PROGRESS: at 52.66% examples, 517055 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:07,312 : INFO : PROGRESS: at 53.54% examples, 517481 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:08,331 : INFO : PROGRESS: at 54.46% examples, 518227 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:09,370 : INFO : PROGRESS: at 55.39% examples, 518657 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:10,403 : INFO : PROGRESS: at 56.28% examples, 518942 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:11,420 : INFO : PROGRESS: at 56.90% examples, 516823 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:12,443 : INFO : PROGRESS: at 57.57% examples, 515235 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:13,449 : INFO : PROGRESS: at 58.01% examples, 511915 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:05:14,458 : INFO : PROGRESS: at 58.81% examples, 511602 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:15,472 : INFO : PROGRESS: at 59.59% examples, 511100 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:16,497 : INFO : PROGRESS: at 60.28% examples, 509881 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:17,514 : INFO : PROGRESS: at 61.09% examples, 509698 words/s, in_qsize 4, out_qsize 1
+2017-02-17 22:05:18,515 : INFO : PROGRESS: at 61.80% examples, 508680 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:19,518 : INFO : PROGRESS: at 62.53% examples, 507946 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:20,534 : INFO : PROGRESS: at 63.42% examples, 508493 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:21,536 : INFO : PROGRESS: at 64.14% examples, 507716 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:22,552 : INFO : PROGRESS: at 65.04% examples, 508393 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:23,567 : INFO : PROGRESS: at 66.07% examples, 510042 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:05:24,568 : INFO : PROGRESS: at 67.08% examples, 511620 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:25,577 : INFO : PROGRESS: at 68.09% examples, 513033 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:26,590 : INFO : PROGRESS: at 69.02% examples, 513788 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:05:27,607 : INFO : PROGRESS: at 69.83% examples, 513653 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:28,609 : INFO : PROGRESS: at 70.79% examples, 514702 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:29,617 : INFO : PROGRESS: at 71.46% examples, 513569 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:30,651 : INFO : PROGRESS: at 72.23% examples, 512992 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:31,652 : INFO : PROGRESS: at 72.91% examples, 512019 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:05:32,664 : INFO : PROGRESS: at 73.62% examples, 511173 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:33,673 : INFO : PROGRESS: at 74.39% examples, 510855 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:34,696 : INFO : PROGRESS: at 75.23% examples, 510762 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:35,704 : INFO : PROGRESS: at 75.97% examples, 510137 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:36,710 : INFO : PROGRESS: at 76.47% examples, 508020 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:37,773 : INFO : PROGRESS: at 77.25% examples, 507447 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:38,806 : INFO : PROGRESS: at 77.58% examples, 504128 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:39,814 : INFO : PROGRESS: at 78.30% examples, 503512 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:40,820 : INFO : PROGRESS: at 79.25% examples, 504400 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:41,837 : INFO : PROGRESS: at 80.24% examples, 505417 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:42,898 : INFO : PROGRESS: at 81.11% examples, 505453 words/s, in_qsize 4, out_qsize 1
+2017-02-17 22:05:43,910 : INFO : PROGRESS: at 81.67% examples, 503828 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:44,913 : INFO : PROGRESS: at 82.75% examples, 505476 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:05:45,934 : INFO : PROGRESS: at 83.73% examples, 506378 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:46,936 : INFO : PROGRESS: at 84.64% examples, 507036 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:47,955 : INFO : PROGRESS: at 85.77% examples, 508899 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:48,957 : INFO : PROGRESS: at 86.81% examples, 510267 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:50,001 : INFO : PROGRESS: at 87.76% examples, 510881 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:51,023 : INFO : PROGRESS: at 88.52% examples, 510497 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:52,034 : INFO : PROGRESS: at 89.63% examples, 512123 words/s, in_qsize 5, out_qsize 1
+2017-02-17 22:05:53,034 : INFO : PROGRESS: at 90.26% examples, 511085 words/s, in_qsize 4, out_qsize 1
+2017-02-17 22:05:54,039 : INFO : PROGRESS: at 91.35% examples, 512578 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:55,060 : INFO : PROGRESS: at 92.04% examples, 511801 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:05:56,061 : INFO : PROGRESS: at 92.33% examples, 508912 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:05:57,076 : INFO : PROGRESS: at 92.84% examples, 507166 words/s, in_qsize 4, out_qsize 1
+2017-02-17 22:05:58,145 : INFO : PROGRESS: at 93.35% examples, 505209 words/s, in_qsize 6, out_qsize 0
+2017-02-17 22:05:59,152 : INFO : PROGRESS: at 93.76% examples, 503067 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:06:00,166 : INFO : PROGRESS: at 94.87% examples, 504699 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:06:01,185 : INFO : PROGRESS: at 95.98% examples, 506035 words/s, in_qsize 3, out_qsize 0
+2017-02-17 22:06:02,188 : INFO : PROGRESS: at 97.07% examples, 507494 words/s, in_qsize 3, out_qsize 0
+2017-02-17 22:06:03,192 : INFO : PROGRESS: at 98.18% examples, 509003 words/s, in_qsize 5, out_qsize 0
+2017-02-17 22:06:04,200 : INFO : PROGRESS: at 99.33% examples, 510669 words/s, in_qsize 4, out_qsize 0
+2017-02-17 22:06:04,778 : INFO : worker thread finished; awaiting finish of 2 more threads
+2017-02-17 22:06:04,786 : INFO : worker thread finished; awaiting finish of 1 more threads
+2017-02-17 22:06:04,788 : INFO : worker thread finished; awaiting finish of 0 more threads
+2017-02-17 22:06:04,788 : INFO : training on 85026035 raw words (62530504 effective words) took 122.2s, 511606 effective words/s
+
+
+## some test example:
+model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
+model.most_similar(positive=['woman', 'king'], negative=['man'], topn=2) 
+model.most_similar(['man'])
+
+## we can also save model
+model.save('text8.model')
+model.save_word2vec_format('text.model.bin', binary=True)
+```
+
+##Glove
+
+```python
+import itertools
+from gensim.models.word2vec import Text8Corpus
+from glove import Corpus, Glove
+sentences = list(itertools.islice(Text8Corpus('text8'),None))
+corpus = Corpus()
+corpus.fit(sentences, window=10)
+glove = Glove(no_components=100, learning_rate=0.05)
+glove.fit(corpus.matrix, epochs=30, no_threads=4, verbose=True)
 ```
 
 # Deep Learning NLP
