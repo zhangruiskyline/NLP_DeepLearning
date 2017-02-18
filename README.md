@@ -183,6 +183,57 @@ like book titles have something 3rd edition
 ```python
 tokens = [t for t in tokens if not any(c.isdigit() for c in t)] # remove any digits, i.e. "3rd edition"
 ```
+
+# word embedding 
+ > dimension reduction(like PCA)
+ > Finding a high level representation of data
+ > decorrelate: if 99% docuements that contains "car" also contains "vehicle", then we do not need two dimensions to represent
+ > Words = categorical variables -> One hot encoding 
+ > 1 million words -> 1 millision dimension vector to represent
+ 
+*Problem of one hot encoding?*
+ 
+ > dimension too high
+ > (car, vehicle) are more similar with (car, ocean)
+ > but one hot encoding has all words in same distance apart
+ > [1,0,0] - [0,1,0] = 2(Manhatan distance)
+ > do not know two words are similar 
+ 
+*Word embedding*
+
+ > vocabuary in row, documents in col
+ > which document a certain word shows up is *__feature__*
+ > example: if certain words always/only shows in financial report, only need one dimension to represent
+ > Unsupervised learning: "financial report" is hidden cause/latent variable. The actually document is generated from a distribution
+ which describe what they looks like 
+ > Word embedding has meaning : King - Man = Queue - woman
+ 
+*PCA way to understand*
+
+```python
+from sklearn.decomposition import PCA
+X = doc_matrix
+model = PCA()
+Z = model.fit_transform(X)
+# X is VxN, and Z is VxD, D<<N
+```
+In this case, Z is word embedding, each row has D dimensional 
+
+## word analogies
+ > king - man = queue - woman ?
+
+```
+vec(king) = We[word2idx["king"]]
+v0 = vec(king) - vec(man) + vec(woman)
+# find one that closes to v0, return that word
+``` 
+ > distance in word distance:  
+ > Cos distance: dist(a,b) = 1 - cos(a,b)
+ 
+# TF-IDF and t-SNE
+example: consider each paragraph a document(not sentence otherwise training time is too long)
+
+
 #Word2vec
 
 referring to [Word2vec Tutorial](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
@@ -265,6 +316,15 @@ And what does it mean for two words to have similar contexts? I think you could 
 like “engine” and “transmission”, would probably have similar contexts as well.
 Here’s an illustration of calculating the output of the output neuron for the word “car”.
 
+## Wordnet example
+ > taxonomy like WordNet: hypernyms (is-a) relationships
+
+```python
+from nltk.corpus import wordnet as wn
+panda = wn.sysset('pandan.n.01')
+hyper = lambda s:s.hypernyms()
+list(panda.closure(hyper))
+```
 
 # Deep Learning NLP
 
