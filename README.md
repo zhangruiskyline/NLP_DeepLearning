@@ -241,18 +241,27 @@ example: consider each paragraph a document(not sentence otherwise training time
 
 ## Main idea:
 
-* predict every word and its context words
-* Two main algorithms
-> CBOW(Continuous Bag of Words): predict target word from a bag of words. CBOW is trained to predict the target word t from the contextual words that surround it
-> Skip Gram: predict target words from bag of words(position independent). The direction of the prediction is simply inverted,
+*Predict every word and its context words*
+> Two main algorithms
+
+* CBOW(Continuous Bag of Words): predict target word from a bag of words. CBOW is trained to predict the target word t from the contextual words that surround it
+* Skip Gram: predict target words from bag of words(position independent). The direction of the prediction is simply inverted, predicting the context given a word
 
 we can refer this below pic 
 ![alt text][CBOW_and_skip_gram]
 [CBOW_and_skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW_and_Skip_gram.png
 
-* Two efficient training methods
-> Hierarchical softmax
-> Negative sampling
+* CBOW: several times faster to train than the skip-gram, slightly better accuracy for the frequent words
+* Skip-gram: works well with small amount of the training data, represents well even rare words or phrases.
+
+
+This can get even a bit more complicated if you consider that there are two different ways how to train the models: the normalized hierarchical softmax, and the un-normalized negative sampling. Both work quite differently.
+In CBOW the vectors from the context words are averaged before predicting the center word. In skip-gram there is no averaging of embedding vectors
+
+
+> Two efficient training methods
+* Hierarchical softmax
+* Negative sampling
  
 
 
