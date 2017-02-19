@@ -239,6 +239,19 @@ example: consider each paragraph a document(not sentence otherwise training time
 * Referring to [Word2vec Tutorial](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
 * Another useful linke is [Tensorflow Word2vec](https://www.tensorflow.org/tutorials/word2vec)
 
+## Main idea:
+
+* predict every word and its context words
+* Two main algorithms
+> CBOW(Continuous Bag of Words): predict target word from a bag of words. CBOW is trained to predict the target word t from the contextual words that surround it
+> Skip Gram: predict target words from bag of words(position independent). The direction of the prediction is simply inverted,
+
+* Two efficient training methods
+> Hierarchical softmax
+> Negative sampling
+ 
+
+
 ## The Skip-Gram Model
 Goal: We’re going to train the neural network to do the following. Given a specific word in the middle of a sentence (the input word), 
 look at the words nearby and pick one at random. The network is going to tell us the probability for every word in 
