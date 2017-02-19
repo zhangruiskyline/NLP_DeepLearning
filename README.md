@@ -246,6 +246,10 @@ example: consider each paragraph a document(not sentence otherwise training time
 > CBOW(Continuous Bag of Words): predict target word from a bag of words. CBOW is trained to predict the target word t from the contextual words that surround it
 > Skip Gram: predict target words from bag of words(position independent). The direction of the prediction is simply inverted,
 
+we can refer this below pic 
+![alt text][CBOW_and_skip_gram]
+[CBOW_and_skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW_and_Skip_gram.png
+
 * Two efficient training methods
 > Hierarchical softmax
 > Negative sampling
