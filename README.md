@@ -250,7 +250,7 @@ example: consider each paragraph a document(not sentence otherwise training time
 [CBOW_and_skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW_and_Skip_gram.png
 
 > * CBOW: several times faster to train than the skip-gram, slightly better accuracy for the frequent words
-> * Skip-gram: works well with small amount of the training data, represents well even rare words or phrases.
+> * Skip-gram: represents well even rare words or phrases.
 
 
 This can get even a bit more complicated if you consider that there are two different ways how to train the models: the normalized hierarchical softmax, and the un-normalized negative sampling. Both work quite differently.
@@ -258,9 +258,9 @@ In CBOW the vectors from the context words are averaged before predicting the ce
 
 Let's take a look at these two methods in more detail
 
- * CBOW:
+* CBOW:
  
- > By the Distributional Hypothesis (Firth, 1957; see also the Wikipedia page on Distributional semantics), words with similar distributional properties (i.e. that co-occur regularly) tend to share some aspect of semantic meaning. For example, we may find several sentences in the training set such as "citizens of X protested today" where X (the target word t) may be names of cities or countries that are semantically related. 
+> By the Distributional Hypothesis (Firth, 1957; see also the Wikipedia page on Distributional semantics), words with similar distributional properties (i.e. that co-occur regularly) tend to share some aspect of semantic meaning. For example, we may find several sentences in the training set such as "citizens of X protested today" where X (the target word t) may be names of cities or countries that are semantically related. 
 the goal is to maximize P(t | c) over the training set.  I am simplifying somewhat, but you can show that this probability is roughly inversely proportional to the distance between the current vectors assigned to t and to c. Since this model is trained in an online setting (one example at a time), at time T the goal is therefore to take a small step (mediated by the "learning rate") in order to minimize the distance between the current vectors for t and c (and thereby increase the probability P(t |c)).  By repeating this process over the entire training set, we have that vectors for words that habitually co-occur tend to be nudged closer together, and by gradually lowering the learning rate, this process converges towards some final state of the vectors. 
 
 * Skip Gram
