@@ -236,7 +236,8 @@ example: consider each paragraph a document(not sentence otherwise training time
 
 # Section 4: Word2vec
 
-referring to [Word2vec Tutorial](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+* Referring to [Word2vec Tutorial](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
+* Another useful linke is [Tensorflow Word2vec](https://www.tensorflow.org/tutorials/word2vec)
 
 ## The Skip-Gram Model
 Goal: We’re going to train the neural network to do the following. Given a specific word in the middle of a sentence (the input word), 
@@ -318,8 +319,6 @@ Here’s an illustration of calculating the output of the output neuron for the 
 
 ## Wordnet example
  > taxonomy like WordNet: hypernyms (is-a) relationships
- 
-Another useful linke is [Tensorflow Word2vec](https://www.tensorflow.org/tutorials/word2vec)
 
 ```python
 from gensim.models import word2vec
