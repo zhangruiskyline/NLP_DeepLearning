@@ -313,7 +313,7 @@ And what does it mean for two words to have similar contexts? I think you could 
 like “intelligent” and “smart” would have very similar contexts. Or that words that are related, 
 like “engine” and “transmission”, would probably have similar contexts as well.
 
-##Model Details
+###Model Details
 let’s say we have a vocabulary of 10,000 unique words.
 We’re going to represent an input word like “ants” as a one-hot vector. This vector will have 10,000 components (one for every word in our vocabulary) 
 and we’ll place a “1” in the position corresponding to the word “ants”, and 0s in all of the other positions.
@@ -328,7 +328,7 @@ the training output is also a one-hot vector representing the output word.
 But when you evaluate the trained network on an input word, the output vector will actually be a probability distribution 
 (i.e., a bunch of floating point values, not a one-hot vector).
 
-## Hidden layer
+### Hidden layer
 For our example, we’re going to say that we’re learning word vectors with 300 features. 
 So the hidden layer is going to be represented by a weight matrix with 10,000 rows 
 (one for every word in our vocabulary) and 300 columns (one for every hidden neuron).
@@ -348,7 +348,7 @@ The output of the hidden layer is just the “word vector” for the input word.
 ![alt text][matrix]
 [matrix]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png "example to use word2vec"
 
-##Output
+###Output
 The __*1 x 300*__ word vector for “ants” then gets fed to the output layer. 
 The output layer is a softmax regression classifier. 
 but the gist of it is that each output neuron (one per word in our vocabulary!) 
@@ -376,6 +376,8 @@ And one way for the network to output similar context predictions for these two 
 And what does it mean for two words to have similar contexts? I think you could expect that synonyms like “intelligent” and “smart” would have very similar contexts. Or that words that are related, 
 like “engine” and “transmission”, would probably have similar contexts as well.
 Here’s an illustration of calculating the output of the output neuron for the word “car”.
+
+##Negative sampling
 
 ## Word2vec Application
 ### How to train
