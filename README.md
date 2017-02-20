@@ -238,10 +238,14 @@ example: consider each paragraph a document(not sentence otherwise training time
 
 * Referring to [Word2vec Tutorial](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)
 * Another useful linke is [Tensorflow Word2vec](https://www.tensorflow.org/tutorials/word2vec)
+* Presentation[NIPS word2vec presentation](https://docs.google.com/file/d/0B7XkCwpI5KDYRWRnd1RzWXQ2TWc/edit)
+* A complete resource on word2vec[resource on word2vec](http://mccormickml.com/2016/04/27/word2vec-resources/#alex-minnaars-tutorials)
+
 
 ## Main idea:
 
-*Predict every word and its context words*
+*Predict every word and its context words*, You can get a lot of value by representing a word by means of its neighbors
+“You shall know a word by the company it keeps”. One of most successful idea in modern NLP
 ###Two main algorithms
 * CBOW(Continuous Bag of Words): predict target word from a bag of words. CBOW is trained to predict the target word t from the contextual words that surround it
 * Skip Gram: predict target words from bag of words(position independent). The direction of the prediction is simply inverted, predicting the context given a word
@@ -269,8 +273,15 @@ the goal is to maximize P(t | c) over the training set.  I am simplifying somewh
 
 ### Two efficient training methods
 * Hierarchical softmax
+
+
 * Negative sampling
- 
+
+Traditionally, each training sample will tweak all of the weights in the neural network.
+In the example I gave, we had word vectors with 300 components, and a vocabulary of 10,000 words. Recall that the neural network had two weight matrices–a hidden layer and output layer. 
+Both of these layers would have a weight matrix with 300 x 10,000 = 3 million weights each!
+
+ > Negative sampling addresses this by having each training sample only modify a small percentage of the weights, rather than all of them. 
 
 
 ## The Skip-Gram Model
@@ -341,6 +352,11 @@ we divide this result by the sum of the results from all 10,000 output nodes.
 ![alt text][out_weight]
 [out_weight]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png
 
+we can also refer to this 
+in 
+![alt text][skip_gram]
+[skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png
+
 ##Intuition
 
 If two different words have very similar “contexts” (that is, what words are likely to appear around them), then our model needs to output very similar results for these two words. 
@@ -351,7 +367,9 @@ And what does it mean for two words to have similar contexts? I think you could 
 like “engine” and “transmission”, would probably have similar contexts as well.
 Here’s an illustration of calculating the output of the output neuron for the word “car”.
 
-## Wordnet example
+## Word2vec Application
+### How to train
+
  > taxonomy like WordNet: hypernyms (is-a) relationships
 
 ```python
@@ -511,7 +529,7 @@ model.save('text8.model')
 model.save_word2vec_format('text.model.bin', binary=True)
 ```
 
-##Glove
+#Glove
 
 ```python
 import itertools
