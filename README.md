@@ -283,6 +283,14 @@ Both of these layers would have a weight matrix with 300 x 10,000 = 3 million we
 
  > Negative sampling addresses this by having each training sample only modify a small percentage of the weights, rather than all of them. 
 
+## Continuous Bag of Words (CBOW)
+The mode of CBOW can be shown as following:
+![alt text][CBOW]
+[CBOW]:https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW.png
+
+we can see that for *C* context words, there will be *C* input vectors and output will be the predicting word, which is calculated 
+by the average of all input vectors
+
 
 ## The Skip-Gram Model
 Goal: We’re going to train the neural network to do the following. Given a specific word in the middle of a sentence (the input word), 
@@ -352,7 +360,10 @@ we divide this result by the sum of the results from all 10,000 output nodes.
 ![alt text][out_weight]
 [out_weight]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png
 
-## Another skip gram model overlook 
+###skip gram model in real 
+On the output layer, instead of outputing one multinomial distribution, we are outputing C multinomial distributions. Each output is computed using the same hidden→output i
+is the same matrix:
+
 ![alt text][skip_gram]
 [skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png
 
