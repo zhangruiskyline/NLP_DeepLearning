@@ -352,8 +352,7 @@ we divide this result by the sum of the results from all 10,000 output nodes.
 ![alt text][out_weight]
 [out_weight]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png
 
-we can also refer to this 
-in 
+## Another model overlook 
 ![alt text][skip_gram]
 [skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png
 
