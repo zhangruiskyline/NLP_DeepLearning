@@ -253,8 +253,9 @@ example: consider each paragraph a document(not sentence otherwise training time
 ![alt text][CBOW_and_skip_gram]
 [CBOW_and_skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW_and_Skip_gram.png
 
-> * CBOW: several times faster to train than the skip-gram, slightly better accuracy for the frequent words
-> * Skip-gram: represents well even rare words or phrases.
+> * CBOW: Fast to train than the skip-gram, slightly better accuracy for the frequent words
+CBOW is good at syntatic learning 
+> * Skip-gram: Slow to train, represents well even rare words or phrases. skip gram is good at semantic learning
 
 
 This can get even a bit more complicated if you consider that there are two different ways how to train the models: the normalized hierarchical softmax, and the un-normalized negative sampling. Both work quite differently.
@@ -378,6 +379,17 @@ like “engine” and “transmission”, would probably have similar contexts a
 Here’s an illustration of calculating the output of the output neuron for the word “car”.
 
 ##Negative sampling
+> * Besides the positive training data(in skip gram, it is surrounding context), we need to have negative data
+to train the network so that unncessary context will be used for punishment
+> * Problem to solve: too many weights update in each training epoch of GD
+> * A lot of time spent is spent on words not in target
+> * We sample words from a set of words that are not in context, call these "negative sampling"
+
+A example to show why we need to have negative sampling:
+
+When training the network on the word pair (“fox”, “quick”), recall that the “label” or “correct output” of the network is a one-hot vector. That is, for the output neuron corresponding to “quick” to output a 1, and for all of the other thousands of output neurons to output a 0.
+
+With negative sampling, we are instead going to randomly select just a small number of “negative” words (let’s say 5) to update the weights for. (In this context, a “negative” word is one for which we want the network to output a 0 for). We will also still update the weights for our “positive” word (which is the word “quick” in our current example).
 
 ## Word2vec Application
 ### How to train
