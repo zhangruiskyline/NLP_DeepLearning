@@ -388,8 +388,10 @@ to train the network so that unncessary context will be used for punishment
 A example to show why we need to have negative sampling:
 
 When training the network on the word pair (“fox”, “quick”), recall that the “label” or “correct output” of the network is a one-hot vector. That is, for the output neuron corresponding to “quick” to output a 1, and for all of the other thousands of output neurons to output a 0.
-
 With negative sampling, we are instead going to randomly select just a small number of “negative” words (let’s say 5) to update the weights for. (In this context, a “negative” word is one for which we want the network to output a 0 for). We will also still update the weights for our “positive” word (which is the word “quick” in our current example).
+
+
+> The paper says that selecting 5-20 words works well for smaller datasets, and you can get away with only 2-5 words for large datasets.
 
 ## Word2vec Application
 ### How to train
