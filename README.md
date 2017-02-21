@@ -294,6 +294,8 @@ by the average of all input vectors
 
 
 ## The Skip-Gram Model
+
+### Skip gram in example: word pairs
 Goal: We’re going to train the neural network to do the following. Given a specific word in the middle of a sentence (the input word), 
 look at the words nearby and pick one at random. The network is going to tell us the probability for every word in 
 our vocabulary of being the “nearby word” that we chose.
@@ -314,7 +316,7 @@ And what does it mean for two words to have similar contexts? I think you could 
 like “intelligent” and “smart” would have very similar contexts. Or that words that are related, 
 like “engine” and “transmission”, would probably have similar contexts as well.
 
-###Model Details
+####Model Details
 let’s say we have a vocabulary of 10,000 unique words.
 We’re going to represent an input word like “ants” as a one-hot vector. This vector will have 10,000 components (one for every word in our vocabulary) 
 and we’ll place a “1” in the position corresponding to the word “ants”, and 0s in all of the other positions.
@@ -329,7 +331,7 @@ the training output is also a one-hot vector representing the output word.
 But when you evaluate the trained network on an input word, the output vector will actually be a probability distribution 
 (i.e., a bunch of floating point values, not a one-hot vector).
 
-### Hidden layer
+#### Hidden layer
 For our example, we’re going to say that we’re learning word vectors with 300 features. 
 So the hidden layer is going to be represented by a weight matrix with 10,000 rows 
 (one for every word in our vocabulary) and 300 columns (one for every hidden neuron).
@@ -349,7 +351,7 @@ The output of the hidden layer is just the “word vector” for the input word.
 ![alt text][matrix]
 [matrix]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png "example to use word2vec"
 
-###Output
+####Output
 The __*1 x 300*__ word vector for “ants” then gets fed to the output layer. 
 The output layer is a softmax regression classifier. 
 but the gist of it is that each output neuron (one per word in our vocabulary!) 
@@ -362,13 +364,14 @@ we divide this result by the sum of the results from all 10,000 output nodes.
 [out_weight]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png
 
 ###skip gram model in real 
+In our example, we only use one word to predict its pair word. In real application, we use one word to predict multiple context words.
 On the output layer, instead of outputing one multinomial distribution, we are outputing C multinomial distributions. Each output is computed using the same hidden→output i
 is the same matrix:
 
 ![alt text][skip_gram]
 [skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png
 
-##Intuition
+###Intuition
 
 If two different words have very similar “contexts” (that is, what words are likely to appear around them), then our model needs to output very similar results for these two words. 
 And one way for the network to output similar context predictions for these two words is if the word vectors are similar.
@@ -378,11 +381,11 @@ And what does it mean for two words to have similar contexts? I think you could 
 like “engine” and “transmission”, would probably have similar contexts as well.
 Here’s an illustration of calculating the output of the output neuron for the word “car”.
 
-##Negative sampling
+###Negative sampling
 > * Besides the positive training data(in skip gram, it is surrounding context), we need to have negative data
-to train the network so that unncessary context will be used for punishment
-> * Problem to solve: too many weights update in each training epoch of GD
-> * A lot of time spent is spent on words not in target
+to train the network so that unncessary context will be used for punishment. 
+> * However, if we tell the network *ALL* not in target words, will be too much,
+ A lot of time spent is spent on words not in target too many weights update in each training epoch of GD
 > * We sample words from a set of words that are not in context, call these "negative sampling"
 
 A example to show why we need to have negative sampling:
@@ -390,13 +393,26 @@ A example to show why we need to have negative sampling:
 When training the network on the word pair (“fox”, “quick”), recall that the “label” or “correct output” of the network is a one-hot vector. That is, for the output neuron corresponding to “quick” to output a 1, and for all of the other thousands of output neurons to output a 0.
 With negative sampling, we are instead going to randomly select just a small number of “negative” words (let’s say 5) to update the weights for. (In this context, a “negative” word is one for which we want the network to output a 0 for). We will also still update the weights for our “positive” word (which is the word “quick” in our current example).
 
+The paper says that selecting 5-20 words works well for smaller datasets, and you can get away with only 2-5 words for large datasets.
 
-> The paper says that selecting 5-20 words works well for smaller datasets, and you can get away with only 2-5 words for large datasets.
+> How to choose negavtive sampling:
+* Distribution of word frequency: *P(W) = count(W)/total* 
+* Word probablity has a long tail 
+* Use *P(W)^0.75* to raise probablity of less happened words
+* If a word apprears a lot, but not in context, we want to give away
+
+### Cost function with negative sampling
+The Cost function will include both the context and negative sampling
+![alt text][cost_func]
+[cost_func]:https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_cost_func.png
 
 ## Word2vec Application
+
 ### How to train
 
- > taxonomy like WordNet: hypernyms (is-a) relationships
+> **gensim** is the most widly used lib
+
+Default gensim dose not have negative sampling enabled
 
 ```python
 from gensim.models import word2vec
