@@ -407,6 +407,9 @@ The Cost function will include both the context and negative sampling
 [cost_func]:https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_cost_func.png
 
 ## Word2vec Application
+ > Word2vec is mostly used for embedding, not for classification
+
+Eg: we have "I love dog and cat" and "My dog ate my food", so if we use dog to predict two sentence, doe not make much sense
 
 ### How to train
 
@@ -611,6 +614,8 @@ For Pos Tag, use the dataset:
 > use dict.items() instead of dict.iteritems()
 
 > use range() instead of xrange()
+
+
 
 
 
