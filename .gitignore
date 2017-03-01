@@ -85,3 +85,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+.idea/*.xml
+text8.zip
+word2vec_paper.pdf
