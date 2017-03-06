@@ -587,7 +587,149 @@ glove = Glove(no_components=100, learning_rate=0.05)
 glove.fit(corpus.matrix, epochs=30, no_threads=4, verbose=True)
 ```
 
-# Deep Learning NLP
+# Section 2: NLP Common Pre-Process Techs 
+
+# Section 3 : Naive Bayes
+
+Here’s a situation you’ve got into:
+
+You are working on a classification problem and you have generated your set of hypothesis, created features and discussed the importance of variables. Within an hour, stakeholders want to see the first cut of the model.
+
+What will you do? You have hunderds of thousands of data points and quite a few variables in your training data set. In such situation, if I were at your place, I would have used *‘Naive Bayes‘*, which can be extremely fast relative to other classification algorithms. It works on Bayes theorem of probability to predict the class of unknown data set.
+
+## What is Naive Bayes algorithm?
+It is a classification technique based on Bayes’ Theorem with an assumption of independence among predictors. In simple terms, a Naive Bayes classifier assumes that the presence of a particular feature in a class is __*unrelated*__ to the presence of any other feature. For example, a fruit may be considered to be an apple if it is red, round, and about 3 inches in diameter. Even if these features depend on each other or upon the existence of the other features, all of these properties independently contribute to the probability that this fruit is an apple and that is why it is known as ‘Naive’.
+
+Bayes theorem provides a way of calculating posterior probability P(c|x) from P(c), P(x) and P(x|c). Look at the equation below:
+![alt text][Bayes_theory]
+[Bayes_theory]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/Bayes_rule.png
+
+ > * P(c|x) is the posterior probability of class (c, target) given predictor (x, attributes).
+ > * P(c) is the prior probability of class.
+ > * P(x|c) is the likelihood which is the probability of predictor given class.
+ > * P(x) is the prior probability of predictor.
+
+## How Naive Bayes algorithm works?
+Let’s understand it using an example. Below I have a training data set of weather and corresponding target variable ‘Play’ (suggesting possibilities of playing). Now, we need to classify whether players will play or not based on weather condition. Let’s follow the below steps to perform it.
+
+ > Step 1: Convert the data set into a frequency table
+
+ > Step 2: Create Likelihood table by finding the probabilities like Overcast probability = 0.29 and probability of playing is 0.64.
+ 
+ > step 3: Step 3: Now, use Naive Bayesian equation to calculate the posterior probability for each class. The class with the highest posterior probability is the outcome of prediction.
+ 
+* Example problem: will we play in sunny?
+We can solve it using above discussed method of posterior probability.
+
+![alt text][NB_example]
+[NB_example]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/Bayes_example.png
+
+P(Yes | Sunny) = P( Sunny | Yes) * P(Yes) / P (Sunny)
+
+Here we have 
+
+P (Sunny |Yes) = 3/9 = 0.33, P(Sunny) = 5/14 = 0.36, P( Yes)= 9/14 = 0.64
+
+Now, 
+
+P (Yes | Sunny) = 0.33 * 0.64 / 0.36 = 0.60, which has higher probability.
+
+Naive Bayes uses a similar method to predict the probability of different class based on various attributes. This algorithm is mostly used in text classification and with problems having multiple classes.
+
+## Pros and Cons of Naive Bayes?
+
+### Pros
+
+* It is easy and fast to predict class of test data set. It also perform well in multi class prediction
+* When assumption of independence holds, a Naive Bayes classifier performs better compare to other models like logistic regression and you need less training data.
+* It perform well in case of categorical input variables compared to numerical variable(s). For numerical variable, normal distribution is assumed (bell curve, which is a strong assumption).
+
+### Cons
+* If categorical variable has a category (in test data set), which was not observed in training data set, then model will assign a 0 (zero) probability and will be unable to make a prediction. This is often known as “Zero Frequency”. To solve this, we can use the smoothing technique. One of the simplest smoothing techniques is called Laplace estimation.
+* On the other side naive Bayes is also known as a bad estimator, so the probability outputs from predict_proba are not to be taken too seriously.
+* Another limitation of Naive Bayes is the assumption of independent predictors. In real life, it is almost impossible that we get a set of predictors which are completely independent.
+
+## Applications
+
+ * Multi class Prediction: 
+ 
+This algorithm is also well known for multi class prediction feature. Here we can predict the probability of multiple classes of target variable.
+
+ * Text classification/ Spam Filtering/ Sentiment Analysis: 
+ 
+Naive Bayes classifiers mostly used in text classification (due to better result in multi class problems and independence rule) have higher success rate as compared to other algorithms. As a result, it is widely used in Spam filtering (identify spam e-mail) and Sentiment Analysis (in social media analysis, to identify positive and negative customer sentiments)
+
+ * Recommendation System: 
+ 
+Naive Bayes Classifier and Collaborative Filtering together builds a Recommendation System that uses machine learning and data mining techniques to filter unseen information and predict whether a user would like a given resource or not
+
+## Naive Bayes in Python and sklearn lib
+
+There are three types of Naive Bayes model under scikit learn library: Referring to [NB in sklearn](http://scikit-learn.org/stable/modules/naive_bayes.html)
+
+* Gaussian: 
+
+It is used in classification and it assumes that features follow a normal distribution.
+
+* Multinomial: 
+
+It is used for discrete counts. For example, let’s say,  we have a text classification problem. Here we can consider bernoulli trials which is one step further and instead of “word occurring in the document”, we have “count how often word occurs in the document”, you can think of it as “number of times outcome number x_i is observed over the n trials”.
+
+* Bernoulli: 
+
+The binomial model is useful if your feature vectors are binary (i.e. zeros and ones). One application would be text classification with ‘bag of words’ model where the 1s & 0s are “word occurs in the document” and “word does not occur in the document” respectively.
+
+ > Here is Python code example
+ 
+```python
+#Import Library of Gaussian Naive Bayes model
+from sklearn.naive_bayes import GaussianNB
+import numpy as np
+
+#assigning predictor and target variables
+X= np.array([[-3,7],[1,5], [1,2], [-2,0], [2,3], [-4,0], [-1,1], [1,1], [-2,2], [2,7], [-4,1], [-2,7]])
+Y = np.array([3, 3, 3, 3, 4, 3, 3, 4, 3, 4, 4, 4])
+#Create a Gaussian Classifier
+model = GaussianNB()
+
+# Train the model using the training sets 
+model.fit(X, Y)
+
+#Predict Output 
+predicted= model.predict([[1,2],[3,4]])
+print(predicted)
+
+#Output: ([3,4])
+```
+
+Some more examples and detailed information on [Text Classification in NB](http://www.inf.ed.ac.uk/teaching/courses/inf2b/learnnotes/inf2b-learn-note07-2up.pdf)
+
+## Improvement 
+
+Here are some tips for improving power of Naive Bayes Model:
+
+* If continuous features do not have normal distribution,
+ 
+we should use transformation or different methods to convert it in normal distribution.
+
+* If test data set has zero frequency issue, 
+
+apply smoothing techniques “Laplace Correction” to predict the class of test data set.
+
+* Remove correlated features, 
+
+as the highly correlated features are voted twice in the model and it can lead to over inflating importance.
+
+* Naive Bayes classifiers has limited options for parameter tuning
+ 
+like alpha=1 for smoothing, fit_prior=[True|False] to learn class prior probabilities or not and some other options (look at detail here). I would recommend to focus on your  pre-processing of data and the feature selection.
+
+* You might think to apply some classifier combination technique like ensembling, bagging and boosting but these methods would not help. 
+
+Actually, “ensembling, boosting, bagging” won’t help since their purpose is to reduce variance. Naive Bayes has no variance to minimize.
+
+
+# Section 3: Deep Learning NLP
 
 ## Dataset
 Dataset: [wiki dump data](https://dumps.wikimedia.org)
@@ -607,6 +749,12 @@ For Pos Tag, use the dataset:
 
 ###sentiment analysis
 [stanford NLP](http://nlp.stanford.edu/sentiment/)
+
+# RNN Intro
+
+## Parse Tree
+
+All words are on leaf nodes.
 
 
 # Python 3 change
