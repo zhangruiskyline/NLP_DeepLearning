@@ -629,13 +629,15 @@ d2: The sun is bright.
 Test Document Set:
 d3: The sun in the sky is bright.
 d4: We can see the shining sun, the bright sun.
+```
 
-```
+Now, what we have to do is to create a index vocabulary (dictionary) of the words of the train document set, using the documents d1 and d2 from the document set, we’ll have the following index vocabulary denoted as __*E(t)*__ where the t is the term:
+![alt text][tf_features.png]
+[tf_features.png]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_features.png
+
+
 Note that the terms like “is” and “the” were ignored as cited before. Now that we have an index vocabulary, we can convert the test document set into a vector space where each term of the vector is indexed as our index vocabulary, so the first term of the vector represents the “blue” term of our vocabulary, the second represents “sun” and so on. Now, we’re going to use the term-frequency to represent each term in our vector space; the term-frequency is nothing more than a measure of how many times the terms present in our vocabulary __*E(t)*__ are present in the documents d3 or d4, we define the term-frequency as a couting function:
-```
-d3 = "The sun in the sky is bright"
-d4 = "We can see the shining sun, the bright sun",
-```
+
 
 Tf is defined as:
 ![alt text][tf_define]
@@ -709,14 +711,15 @@ But let’s go back to our definition of the __tf(t,d)__ which is actually the t
 
 To overcome this problem, the term frequency __tf(t,d)__ of a document on a vector space is usually also normalized. 
 
-idf (inverse document frequency) is then defined:
+ > idf (inverse document frequency) is then defined:
 
 ![alt text][idf]
 [idf]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf.png
 
 where \left|\{d : t \in d\}\right| is the number of documents where the term t appears, when the term-frequency function satisfies \mathrm{tf}(t,d) \neq 0, we’re only adding 1 into the formula to avoid zero-division.
 
-The formula for the tf-idf is then:
+ > The formula for the tf-idf is then:
+
 ![alt text][tfidf]
 [tfidf]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_idf.png
 
@@ -744,6 +747,19 @@ we have:
 
 ![alt text][idf_ex4]
 [idf_ex4]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex4.png
+
+ > The matrix format of idf will be
+
+![alt text][idf_matrix]
+[idf_matrix]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_matrix.png
+
+and then multiply it to the term frequency matrix, 
+
+ > so the final result can be defined then as:
+
+![alt text][tfidf_matrix]
+[tfidf_matrix]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix.png
+
 
 
 # Section 3 : Naive Bayes
