@@ -88,3 +88,12 @@ dkms.conf
 .idea/
 text8.zip
 word2vec_paper.pdf
+
+.text8
+
+*/.text8
+
+*/.ipynb_checkpoints/
+
+Fasttext/.ipynb_checkpoints
+.idea

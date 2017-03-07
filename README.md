@@ -652,7 +652,7 @@ where you have:
 
 TF matrix
 
-TF | blue | sun | bright | sky
+TF_Matrix | blue | sun | bright | sky
 ---| --- | --- | --- | ---
 d3	|0 |	1|	1|	1
 d4 | 0	|2	|1	|0
@@ -718,7 +718,7 @@ To overcome this problem, the term frequency __tf(t,d)__ of a document on a vect
 ![alt text][idf]
 [idf]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf.png
 
-where \left|\{d : t \in d\}\right| is the number of documents where the term t appears, when the term-frequency function satisfies \mathrm{tf}(t,d) \neq 0, we’re only adding 1 into the formula to avoid zero-division.
+where \left|\{d : t \in d\}\right| is the __number of documents__ where the term t appears, when the term-frequency function satisfies \mathrm{tf}(t,d) \neq 0, we’re only adding 1 into the formula to avoid zero-division.
 
  > The formula for the tf-idf is then:
 
@@ -733,10 +733,7 @@ Your document space can be defined then as D = \{ d_1, d_2, \ldots, d_n \} where
 
 Now let’s calculate the idf for each feature present in the feature matrix with the term frequency we have calculated:
 Since we have 4 features
-```
-{'blue': 0, 'sun': 1, 'bright': 2, 'sky': 3}
-```
-we have:
+
 
 ![alt text][idf_ex1]
 [idf_ex1]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex1.png
@@ -751,6 +748,8 @@ we have:
 [idf_ex4]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex4.png
 
  > The matrix format of idf will be
+
+Now that we have our matrix with the term frequency (M_{train}) and the vector representing the idf for each feature of our matrix (\vec{idf_{train}}), we can calculate our tf-idf weights. What we have to do is a simple multiplication of each column of the matrix M_{train} with the respective \vec{idf_{train}} vector dimension. To do that, we can create a square diagonal matrix called M_{idf} with both the vertical and horizontal dimensions equal to the vector \vec{idf_{train}} dimension:
 
 ![alt text][idf_matrix]
 [idf_matrix]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_matrix.png
@@ -773,6 +772,9 @@ and then multiply it to the term frequency matrix,
 
 
 And finally, we can apply our L2 normalization process to the *TF_IDF* matrix. Please note that this normalization is __row-wise__ because we’re going to handle each row of the matrix as a separated vector to be normalized, and not the matrix as a whole:
+
+![alt text][tfidf_norm]
+[tfidf_norm]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_norm.png
 
 # Section 3 : Naive Bayes
 
