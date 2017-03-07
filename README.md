@@ -760,7 +760,13 @@ and then multiply it to the term frequency matrix,
 ![alt text][tfidf_matrix]
 [tfidf_matrix]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix.png
 
+ > The results looks like
+![alt text][tfidf_matrix_val]
+[tfidf_matrix_val]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix_val.png
 
+
+![alt text][tfidf_matrix_val_2]
+[tfidf_matrix_val_2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix_val_2.png
 
 # Section 3 : Naive Bayes
 
