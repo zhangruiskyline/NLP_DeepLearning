@@ -631,7 +631,8 @@ d3: The sun in the sky is bright.
 d4: We can see the shining sun, the bright sun.
 ```
 
-Now, what we have to do is to create a index vocabulary (dictionary) of the words of the train document set, using the documents d1 and d2 from the document set, we’ll have the following index vocabulary denoted as __*E(t)*__ where the t is the term:
+Now, what we have to do is to create a __*index vocabulary*__ (dictionary) of the words of the train document set, using the documents d1 and d2 from the document set, we’ll have the following index vocabulary denoted as __*E(t)*__ where the t is the term:
+
 ![alt text][tf_features.png]
 [tf_features.png]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_features.png
 
@@ -640,11 +641,12 @@ Note that the terms like “is” and “the” were ignored as cited before. No
 
 
 Tf is defined as:
+
 ![alt text][tf_define]
 [tf_define]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_1.png
 
 where you have:
-Tf is defined as:
+
 ![alt text][tf_define_2]
 [tf_define_2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_2.png
 
@@ -768,6 +770,9 @@ and then multiply it to the term frequency matrix,
 
 ![alt text][tfidf_matrix_val_2]
 [tfidf_matrix_val_2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix_val_2.png
+
+
+And finally, we can apply our L2 normalization process to the *TF_IDF* matrix. Please note that this normalization is __row-wise__ because we’re going to handle each row of the matrix as a separated vector to be normalized, and not the matrix as a whole:
 
 # Section 3 : Naive Bayes
 
