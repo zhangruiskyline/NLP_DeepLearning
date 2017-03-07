@@ -589,6 +589,163 @@ glove.fit(corpus.matrix, epochs=30, no_threads=4, verbose=True)
 
 # Section 2: NLP Common Pre-Process Techs 
 
+## Documentation Matrix
+A document-term matrix or term-document matrix is a mathematical matrix that describes the frequency of terms that occur in a collection of documents.
+
+In a document-term matrix, rows correspond to documents in the collection and columns correspond to terms. There are various schemes for determining the value that each entry in the matrix should take. One such scheme is tf-idf. They are useful in the field of natural language processing.
+
+## General Concept:
+When creating a database of terms that appear in a set of documents the document-term matrix contains rows corresponding to the documents and columns corresponding to the terms. For instance if one has the following two (short) documents:
+
+D1 = "I like databases"
+D2 = "I hate databases",
+then the document-term matrix would be:
+
+Doc-Term | I | Like | hate | databse
+---| --- | --- | --- | ---
+D1	|1 |	1|	0|	1
+D2 | 1	|0	|1	|1
+
+> Python sklearn Lib [Link](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html)
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+```
+
+which shows which documents contain which terms and how many times they appear.
+
+## TF-IDF
+
+### Term Frenquency 
+In information retrieval or text mining, the term frequency – inverse document frequency (also called tf-idf), is a well know method to evaluate how important is a word in a document. tf-idf are is a very interesting way to convert the textual representation of information into a Vector Space Model (VSM), or into sparse features, we’ll discuss more about it later, but first, let’s try to understand what is tf-idf and the VSM.
+
+ > Going to the vector space
+ 
+The first step in modeling the document into a vector space is to create a dictionary of terms present in documents. To do that, you can simple select all terms from the document and convert it to a dimension in the vector space, but we know that there are some kind of words (stop words) that are present in almost all documents, and what we’re doing is extracting important features from documents, features do identify them among other similar documents, so using terms like “the, is, at, on”, etc.. isn’t going to help us, so in the information extraction, we’ll just ignore them.
+Let’s take the documents below to define our (stupid) document space:
+```
+Train Document Set:
+d1: The sky is blue.
+d2: The sun is bright.
+Test Document Set:
+d3: The sun in the sky is bright.
+d4: We can see the shining sun, the bright sun.
+
+```
+Note that the terms like “is” and “the” were ignored as cited before. Now that we have an index vocabulary, we can convert the test document set into a vector space where each term of the vector is indexed as our index vocabulary, so the first term of the vector represents the “blue” term of our vocabulary, the second represents “sun” and so on. Now, we’re going to use the term-frequency to represent each term in our vector space; the term-frequency is nothing more than a measure of how many times the terms present in our vocabulary __*E(t)*__ are present in the documents d3 or d4, we define the term-frequency as a couting function:
+```
+d3 = "The sun in the sky is bright"
+d4 = "We can see the shining sun, the bright sun",
+```
+
+Tf is defined as:
+![alt text][tf_define]
+[tf_define]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_1.png
+
+where you have:
+Tf is defined as:
+![alt text][tf_define_2]
+[tf_define_2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_2.png
+
+TF matrix
+
+TF | blue | sun | bright | sky
+---| --- | --- | --- | ---
+d3	|0 |	1|	1|	1
+d4 | 0	|2	|1	|0
+
+As you may have noted, these matrices representing the term frequencies tend to be very sparse (with majority of terms zeroed), and that’s why you’ll see a common representation of these matrix as sparse matrices.
+
+ > Python Practice
+
+define the training and test set
+```python
+train_set = ("The sky is blue.", "The sun is bright.")
+test_set = ("The sun in the sky is bright.",
+    "We can see the shining sun, the bright sun.")
+```
+In scikit.learn, what we have presented as the term-frequency, is called __*CountVectorizer*__, so we need to import it and create a news instance:
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+vectorizer = CountVectorizer()
+```
+The __*CountVectorizer*___ already uses as default “analyzer” called __*WordNGramAnalyzer*__, which is responsible to convert the text to lowercase, accents removal, token extraction, filter stop words, etc… you can see more information by printing the class information:
+```python
+print(vectorizer)
+CountVectorizer(analyzer__min_n=1,
+analyzer__stop_words=set(['all', 'six', 'less', 'being', 'indeed', 'over', 'move', 'anyway', 'four', 'not', 'own', 'through', 'yourselves', (...)
+```
+Let’s create now the vocabulary index:
+```python
+vectorizer.fit_transform(train_set)
+print(vectorizer.vocabulary)
+{'blue': 0, 'sun': 1, 'bright': 2, 'sky': 3}
+```
+
+Let’s use the same vectorizer now to create the sparse matrix of our test_set documents:
+```python
+smatrix = vectorizer.transform(test_set)
+print(smatrix)
+(0, 1)        1
+(0, 2)        1
+(0, 3)        1
+(1, 1)        2
+(1, 2)        1
+```
+Note that the sparse matrix created called smatrix is a Scipy sparse matrix with elements stored in a [Coordinate format](https://en.wikipedia.org/wiki/Sparse_matrix#Coordinate_list_.28COO.29). But you can convert it into a dense format:
+```python
+smatrix.todense()
+matrix([[0, 1, 1, 1],
+........[0, 2, 1, 0]], dtype=int64)
+```
+
+### The inverse document frequency (IDF) weight
+In the first post, we learned how to use the term-frequency to represent textual information in the vector space. However, the main problem with the term-frequency approach is that it scales up frequent terms and scales down rare terms which are empirically more informative than the high frequency terms. 
+
+The basic intuition is that a term that occurs frequently in many documents is not a good discriminator, and really makes sense (at least in many experimental tests); the important question here is: why would you, in a classification problem for instance, emphasize a term which is almost present in the entire corpus of your documents ?
+
+The tf-idf weight comes to solve this problem. What tf-idf gives is how important is a word to a document in a collection, and that’s why tf-idf incorporates local and global parameters, because it takes in consideration not only the isolated term but also the term within the document collection. What tf-idf then does to solve that problem, is to scale down the frequent terms while scaling up the rare terms; a term that occurs 10 times more than another isn’t 10 times more important than it, that’s why tf-idf uses the logarithmic scale to do that.
+
+But let’s go back to our definition of the __tf(t,d)__ which is actually the term count of the term t in the document d. The use of this simple term frequency could lead us to problems like keyword spamming, which is when we have a repeated term in a document with the purpose of improving its ranking on an IR (Information Retrieval) system or even create a bias towards long documents, making them look more important than they are just because of the high frequency of the term in the document.
+
+To overcome this problem, the term frequency __tf(t,d)__ of a document on a vector space is usually also normalized. 
+
+idf (inverse document frequency) is then defined:
+
+![alt text][idf]
+[idf]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf.png
+
+where \left|\{d : t \in d\}\right| is the number of documents where the term t appears, when the term-frequency function satisfies \mathrm{tf}(t,d) \neq 0, we’re only adding 1 into the formula to avoid zero-division.
+
+The formula for the tf-idf is then:
+![alt text][tfidf]
+[tfidf]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_idf.png
+
+and this formula has an important consequence: a high weight of the tf-idf calculation is reached when you have a high term frequency (tf) in the given document (local parameter) and a low document frequency of the term in the whole collection (global parameter).
+
+ > Example 
+
+Your document space can be defined then as D = \{ d_1, d_2, \ldots, d_n \} where n is the number of documents in your corpus, and in our case as D_{train} = \{d_1, d_2\} and D_{test} = \{d_3, d_4\}. The cardinality of our document space is defined by \left|{D_{train}}\right| = 2 and \left|{D_{test}}\right| = 2, since we have only 2 two documents for training and testing, but they obviously don’t need to have the same cardinality.
+
+Now let’s calculate the idf for each feature present in the feature matrix with the term frequency we have calculated:
+Since we have 4 features
+```
+{'blue': 0, 'sun': 1, 'bright': 2, 'sky': 3}
+```
+we have:
+
+![alt text][idf_ex1]
+[idf_ex1]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex1.png
+
+![alt text][idf_ex2]
+[idf_ex2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex2.png
+
+![alt text][idf_ex3]
+[idf_ex3]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex3.png
+
+![alt text][idf_ex4]
+[idf_ex4]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex4.png
+
+
 # Section 3 : Naive Bayes
 
 Here’s a situation you’ve got into:
@@ -729,7 +886,7 @@ like alpha=1 for smoothing, fit_prior=[True|False] to learn class prior probabil
 Actually, “ensembling, boosting, bagging” won’t help since their purpose is to reduce variance. Naive Bayes has no variance to minimize.
 
 
-# Section 3: Deep Learning NLP
+# Section 4: Deep Learning NLP
 
 ## Dataset
 Dataset: [wiki dump data](https://dumps.wikimedia.org)
