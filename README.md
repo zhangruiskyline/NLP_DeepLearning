@@ -659,48 +659,6 @@ d4 | 0	|2	|1	|0
 
 As you may have noted, these matrices representing the term frequencies tend to be very sparse (with majority of terms zeroed), and that’s why you’ll see a common representation of these matrix as sparse matrices.
 
- > Python Practice
-
-define the training and test set
-```python
-train_set = ("The sky is blue.", "The sun is bright.")
-test_set = ("The sun in the sky is bright.",
-    "We can see the shining sun, the bright sun.")
-```
-In scikit.learn, what we have presented as the term-frequency, is called __*CountVectorizer*__, so we need to import it and create a news instance:
-```python
-from sklearn.feature_extraction.text import CountVectorizer
-vectorizer = CountVectorizer()
-```
-The __*CountVectorizer*___ already uses as default “analyzer” called __*WordNGramAnalyzer*__, which is responsible to convert the text to lowercase, accents removal, token extraction, filter stop words, etc… you can see more information by printing the class information:
-```python
-print(vectorizer)
-CountVectorizer(analyzer__min_n=1,
-analyzer__stop_words=set(['all', 'six', 'less', 'being', 'indeed', 'over', 'move', 'anyway', 'four', 'not', 'own', 'through', 'yourselves', (...)
-```
-Let’s create now the vocabulary index:
-```python
-vectorizer.fit_transform(train_set)
-print(vectorizer.vocabulary)
-{'blue': 0, 'sun': 1, 'bright': 2, 'sky': 3}
-```
-
-Let’s use the same vectorizer now to create the sparse matrix of our test_set documents:
-```python
-smatrix = vectorizer.transform(test_set)
-print(smatrix)
-(0, 1)        1
-(0, 2)        1
-(0, 3)        1
-(1, 1)        2
-(1, 2)        1
-```
-Note that the sparse matrix created called smatrix is a Scipy sparse matrix with elements stored in a [Coordinate format](https://en.wikipedia.org/wiki/Sparse_matrix#Coordinate_list_.28COO.29). But you can convert it into a dense format:
-```python
-smatrix.todense()
-matrix([[0, 1, 1, 1],
-........[0, 2, 1, 0]], dtype=int64)
-```
 
 ### The inverse document frequency (IDF) weight
 In the first post, we learned how to use the term-frequency to represent textual information in the vector space. However, the main problem with the term-frequency approach is that it scales up frequent terms and scales down rare terms which are empirically more informative than the high frequency terms. 
@@ -775,6 +733,46 @@ And finally, we can apply our L2 normalization process to the *TF_IDF* matrix. P
 
 ![alt text][tfidf_norm]
 [tfidf_norm]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_norm.png
+
+### Python Example
+
+The first step is to create our training and testing document set and computing the term frequency matrix:
+
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+train_set = ("The sky is blue.", "The sun is bright.")
+test_set = ("The sun in the sky is bright.",
+"We can see the shining sun, the bright sun.")
+count_vectorizer = CountVectorizer()
+count_vectorizer.fit_transform(train_set)
+print "Vocabulary:", count_vectorizer.vocabulary
+# Vocabulary: {'blue': 0, 'sun': 1, 'bright': 2, 'sky': 3}
+freq_term_matrix = count_vectorizer.transform(test_set)
+print freq_term_matrix.todense()
+#[[0 1 1 1]
+#[0 2 1 0]]
+```
+
+Now that we have the frequency term matrix (called freq_term_matrix), we can instantiate the TfidfTransformer, which is going to be responsible to calculate the tf-idf weights for our term frequency matrix:
+
+```python
+from sklearn.feature_extraction.text import TfidfTransformer
+tfidf = TfidfTransformer(norm="l2")
+tfidf.fit(freq_term_matrix)
+print "IDF:", tfidf.idf_
+# IDF: [ 0.69314718 -0.40546511 -0.40546511  0.        ]
+```
+
+Note that I’ve specified the norm as L2, this is optional (actually the default is L2-norm), but I’ve added the parameter to make it explicit to you that it it’s going to use the L2-norm. Also note that you can see the calculated idf weight by accessing the internal attribute called idf_. Now that fit() method has calculated the idf for the matrix, let’s transform the freq_term_matrix to the tf-idf weight matrix:
+
+```python
+tf_idf_matrix = tfidf.transform(freq_term_matrix)
+print tf_idf_matrix.todense()
+# [[ 0.         -0.70710678 -0.70710678  0.        ]
+# [ 0.         -0.89442719 -0.4472136   0.        ]]
+```
+
+
 
 # Section 3 : Naive Bayes
 
