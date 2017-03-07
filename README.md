@@ -954,9 +954,6 @@ Let's go through details:
     * Which topics occur in this document?
     * Which topics like the word X?
 
-![alt text][lda_iterate]
-[lda_iterate]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_resample.png
-
 * Get results
 
 ![alt text][lda_results]
@@ -964,16 +961,15 @@ Let's go through details:
 
 * Evaluate model
 
- > Hard: Unsupervised learning. No labels.
+ __*Hard: Unsupervised learning. No labels*__
 
- > Human-in-the-loop
-
+ __*Human-in-the-loop*__
     
-    * Word intrusion
+ > Word intrusion
 
 For each trained topic, take first ten words, substitute one of them with another, randomly chosen word (intruder!) and see whether a human can reliably tell which one it was. If so, the trained topic is topically coherent (good); if not, the topic has no discernible theme (bad) [2]
 
-    * Topic intrusion: 
+ > Topic intrusion: 
 
 Subjects are shown the title and a snippet from a document. Along with the document they are presented with four topics. Three of those topics are the highest probability topics assigned to that document. The remaining intruder topic is chosen randomly from the other low-probability topics in the model
 
