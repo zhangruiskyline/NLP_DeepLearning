@@ -967,6 +967,7 @@ Let's go through details:
  __*Hard: Unsupervised learning. No labels*__
 
  __*Human-in-the-loop*__
+
     
 > Word intrusion
 
@@ -976,6 +977,63 @@ For each trained topic, take first ten words, substitute one of them with anothe
 
 Subjects are shown the title and a snippet from a document. Along with the document they are presented with four topics. Three of those topics are the highest probability topics assigned to that document. The remaining intruder topic is chosen randomly from the other low-probability topics in the model
 
+ 
+![alt text][lda_eva]
+[lda_eva]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_eva.png
+
+__*Metrics*__
+
+Cosine similarity: split each document into two parts, and check that topics of the first half are similar to topics of the second halves of different documents are mostly dissimilar
+
+![alt text][lda_metric]
+[lda_metric]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_metric.png
+
+More Metrics [reference](http://mimno.infosci.cornell.edu/slides/details.pdf):
+
+1. Size (#	of tokens assigned)
+2. Within-doc rank
+3. Similarity to corpus-wide distribution
+4. Locally-frequent words
+5. Co-doc Coherence
+
+## LDA Python Lib
+
+ * Gensim: https://radimrehurek.com/gensim/
+
+ * Graphlab: https://dato.com/products/create/docs/generated/graphlab.topic_model.create.html
+
+ * lda: http://pythonhosted.org//lda/
+
+> Warning: LDA in scikit-learn refers to Linear Discriminant Analysis! scikit-learn implements alternative algorithms, e.g. NMF (Non Negative Matrix Factorization)
+
+* Step 1: [Load Gensim](http://radimrehurek.com/gensim/wiki.html#latent-dirichlet-allocation)
+
+```python
+import gensim
+# load id->word mapping (the dictionary)
+id2word = gensim.corpora.Dictionary.load_from_text('wiki_en_wordids.txt')
+# load corpus iterator
+mm = gensim.corpora.MmCorpus('wiki_en_tfidf.mm')
+# extract 100 LDA topics, using 20 full passes, (batch mode) no online updates
+lda = gensim.models.ldamodel.LdaModel(corpus=mm, id2word=id2word, num_topics=100, update_every=0, passes=20)
+```
+* Step 2: [Graphlab](https://dato.com/products/create/docs/generated/graphlab.topic_model.create.html)
+```python
+import graphlab as gl
+docs = graphlab.SArray('http://s3.amazonaws.com/dato-datasets/nytimes')
+m = gl.topic_model.create(docs,
+                          num_topics=20,       # number of topics
+                          num_iterations=10,   # algorithm parameters
+                          alpha=.01, beta=.1)  # hyperparameters
+```
+
+* Step 3: LDA
+```python
+import lda
+X = lda.datasets.load_reuters()
+model = lda.LDA(n_topics=20, n_iter=1500, random_state=1)
+model.fit(X)  # model.fit_transform(X) is also available
+```
 
 # Section 5: Deep Learning NLP
 
