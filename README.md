@@ -913,8 +913,71 @@ like alpha=1 for smoothing, fit_prior=[True|False] to learn class prior probabil
 
 Actually, “ensembling, boosting, bagging” won’t help since their purpose is to reduce variance. Naive Bayes has no variance to minimize.
 
+# Section 4: LDA
 
-# Section 4: Deep Learning NLP
+## Topic model
+
+* A topic model is a type of statistical model for discovering the abstract  that occur in a collection
+
+* Topic models are a suite of algorithms that uncover the  in document collections. These algorithms help us develop new ways to summarize large archives of texts
+
+* Topic models provide a simple way to analyze large volumes of text. A "topic" consists of a  of words that  occur together
+
+## LDA Understanding 
+
+ > LDA can be described as:
+
+![alt text][lda]
+[lda]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda.png
+
+ > LDA Algorithm in details
+
+Let's go through details:
+
+1. initilize the parameter
+
+![alt text][lda_init]
+[lda_init]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_init.png
+
+2. initilize the topic assignments randomly
+
+![alt text][lda_init_2]
+[lda_init_2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_init_2.png
+
+3. iterate
+
+![alt text][lda_iterate]
+[lda_iterate]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_iterate.png
+
+4. Resample topic for word, given all other words and their current topic assignments
+
+* Which topics occur in this document?
+* Which topics like the word X?
+
+![alt text][lda_iterate]
+[lda_iterate]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_resample.png
+
+5. Get results
+
+![alt text][lda_results]
+[lda_results]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_results.png
+
+6. Evaluate model
+
+ > Hard: Unsupervised learning. No labels.
+
+ > Human-in-the-loop
+
+ * Word intrusion
+
+For each trained topic, take first ten words, substitute one of them with another, randomly chosen word (intruder!) and see whether a human can reliably tell which one it was. If so, the trained topic is topically coherent (good); if not, the topic has no discernible theme (bad) [2]
+
+ * Topic intrusion: 
+
+Subjects are shown the title and a snippet from a document. Along with the document they are presented with four topics. Three of those topics are the highest probability topics assigned to that document. The remaining intruder topic is chosen randomly from the other low-probability topics in the model
+
+
+# Section 5: Deep Learning NLP
 
 ## Dataset
 Dataset: [wiki dump data](https://dumps.wikimedia.org)
