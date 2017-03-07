@@ -1049,18 +1049,18 @@ model.fit(X)  # model.fit_transform(X) is also available
 
 * Vector Space
 
-![alt text][preprocess]
-[preprocess]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/vector-space.png
+![alt text][vector-space]
+[vector-space]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/vector-space.png
 
 * Gensim Model
 
-![alt text][preprocess]
-[preprocess]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/gensim.png
+![alt text][gensim]
+[gensim]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/gensim.png
 
 * Evaluation-Virtulization [LDAVis](https://github.com/cpsievert/LDAvis, https://github.com/bmabey/pyLDAvis)
 
-![alt text][preprocess]
-[preprocess]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/ldavis.png
+![alt text][ldavis]
+[ldavis]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/ldavis.png
 
 * Topik
 
