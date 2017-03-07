@@ -1035,6 +1035,61 @@ model = lda.LDA(n_topics=20, n_iter=1500, random_state=1)
 model.fit(X)  # model.fit_transform(X) is also available
 ```
 
+## The whole process system
+
+* Pipeline
+
+![alt text][pipeline]
+[pipeline]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/pipeline.png
+
+* Pre-Process
+
+![alt text][preprocess]
+[preprocess]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/preprocessing.png
+
+* Vector Space
+
+![alt text][preprocess]
+[preprocess]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/vector-space.png
+
+* Gensim Model
+
+![alt text][preprocess]
+[preprocess]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/gensim.png
+
+* Evaluation-Virtulization [LDAVis](https://github.com/cpsievert/LDAvis, https://github.com/bmabey/pyLDAvis)
+
+![alt text][preprocess]
+[preprocess]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/ldavis.png
+
+* Topik
+
+The aim of topik is to provide a full suite and high-level interface for anyone interested in applying topic modeling. For that purpose, topik includes many utilities beyond statistical modeling algorithms and wraps all of its features into an easy callable function and a command line interface.
+
+[https://github.com/ContinuumIO/topik](https://github.com/ContinuumIO/topik)
+... automating the pipeline
+
+```python
+from topik.run import run_model
+run_model('data.json', field='abstract', model='lda_online', r_ldavis=True, output_file=True)
+```
+
+## Reference
+http://www.cs.princeton.edu/~blei/papers/Blei2012.pdf
+
+http://miriamposner.com/blog/very-basic-strategies-for-interpreting-results-from-the-topic-modeling-tool/
+
+http://journalofdigitalhumanities.org/2-1/topic-modeling-a-basic-introduction-by-megan-r-brett/
+
+https://beta.oreilly.com/ideas/topic-models-past-present-and-future
+
+IPython notebooks explaining Dirichlet Processes, HDPs, and Latent Dirichlet Allocation from Timothy Hopper
+
+https://github.com/tdhopper/notes-on-dirichlet-processes
+
+Slides: 
+http://chdoig.github.com/pygotham-topic-modeling
+
 # Section 5: Deep Learning NLP
 
 ## Dataset
