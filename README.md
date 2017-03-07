@@ -954,6 +954,9 @@ Let's go through details:
     * Which topics occur in this document?
     * Which topics like the word X?
 
+![alt text][lda_resample]
+[lda_resample]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_resample.png
+
 * Get results
 
 ![alt text][lda_results]
