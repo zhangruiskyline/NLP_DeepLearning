@@ -17,7 +17,7 @@ def main():
     ##dats set from https://www.kaggle.com/aaron7sun/stocknews
     data_path = '/Users/ruizhang/Documents/NLP_dataset/'
     data = pd.read_csv(data_path + "Combined_News_DJIA.csv")
-
+    print(data.head())
     train = data[data['Date'] < '2015-01-01']
     test = data[data['Date'] > '2014-12-31']
     print(len(test))
