@@ -364,8 +364,7 @@ In our example, we only use one word to predict its pair word. In real applicati
 On the output layer, instead of outputing one multinomial distribution, we are outputing C multinomial distributions. Each output is computed using the same hidden→output i
 is the same matrix:
 
-![alt text][skip_gram]
-[skip_gram]:https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png
+![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png)
 
 ###Intuition
 
@@ -399,8 +398,7 @@ The paper says that selecting 5-20 words works well for smaller datasets, and yo
 
 ### Cost function with negative sampling
 The Cost function will include both the context and negative sampling
-![alt text][cost_func]
-[cost_func]:https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_cost_func.png
+![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_cost_func.png)
 
 ## Word2vec Application
  > Word2vec is mostly used for embedding, not for classification
@@ -629,8 +627,7 @@ d4: We can see the shining sun, the bright sun.
 
 Now, what we have to do is to create a __*index vocabulary*__ (dictionary) of the words of the train document set, using the documents d1 and d2 from the document set, we’ll have the following index vocabulary denoted as __*E(t)*__ where the t is the term:
 
-![alt text][tf_features.png]
-[tf_features.png]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_features.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_features.png)
 
 
 Note that the terms like “is” and “the” were ignored as cited before. Now that we have an index vocabulary, we can convert the test document set into a vector space where each term of the vector is indexed as our index vocabulary, so the first term of the vector represents the “blue” term of our vocabulary, the second represents “sun” and so on. Now, we’re going to use the term-frequency to represent each term in our vector space; the term-frequency is nothing more than a measure of how many times the terms present in our vocabulary __*E(t)*__ are present in the documents d3 or d4, we define the term-frequency as a couting function:
@@ -638,13 +635,11 @@ Note that the terms like “is” and “the” were ignored as cited before. No
 
 Tf is defined as:
 
-![alt text][tf_define]
-[tf_define]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_1.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_1.png)
 
 where you have:
 
-![alt text][tf_define_2]
-[tf_define_2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_2.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_2.png)
 
 TF matrix
 
@@ -669,15 +664,13 @@ To overcome this problem, the term frequency __tf(t,d)__ of a document on a vect
 
  > idf (inverse document frequency) is then defined:
 
-![alt text][idf]
-[idf]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf.png)
 
 where \left|\{d : t \in d\}\right| is the __number of documents__ where the term t appears, when the term-frequency function satisfies \mathrm{tf}(t,d) \neq 0, we’re only adding 1 into the formula to avoid zero-division.
 
  > The formula for the tf-idf is then:
 
-![alt text][tfidf]
-[tfidf]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_idf.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tf_idf.png)
 
 and this formula has an important consequence: a high weight of the tf-idf calculation is reached when you have a high term frequency (tf) in the given document (local parameter) and a low document frequency of the term in the whole collection (global parameter).
 
@@ -689,46 +682,37 @@ Now let’s calculate the idf for each feature present in the feature matrix wit
 Since we have 4 features
 
 
-![alt text][idf_ex1]
-[idf_ex1]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex1.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex1.png)
 
-![alt text][idf_ex2]
-[idf_ex2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex2.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex2.png)
 
-![alt text][idf_ex3]
-[idf_ex3]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex3.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex3.png)
 
-![alt text][idf_ex4]
-[idf_ex4]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex4.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_ex4.png)
 
  > The matrix format of idf will be
 
 Now that we have our matrix with the term frequency (M_{train}) and the vector representing the idf for each feature of our matrix (\vec{idf_{train}}), we can calculate our tf-idf weights. What we have to do is a simple multiplication of each column of the matrix M_{train} with the respective \vec{idf_{train}} vector dimension. To do that, we can create a square diagonal matrix called M_{idf} with both the vertical and horizontal dimensions equal to the vector \vec{idf_{train}} dimension:
 
-![alt text][idf_matrix]
-[idf_matrix]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_matrix.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/idf_matrix.png)
 
 and then multiply it to the term frequency matrix, 
 
  > so the final result can be defined then as:
 
-![alt text][tfidf_matrix]
-[tfidf_matrix]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix.png)
 
  > The results looks like
 
-![alt text][tfidf_matrix_val]
-[tfidf_matrix_val]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix_val.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix_val.png)
 
 
-![alt text][tfidf_matrix_val_2]
-[tfidf_matrix_val_2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix_val_2.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_matrix_val_2.png)
 
 
 And finally, we can apply our L2 normalization process to the *TF_IDF* matrix. Please note that this normalization is __row-wise__ because we’re going to handle each row of the matrix as a separated vector to be normalized, and not the matrix as a whole:
 
-![alt text][tfidf_norm]
-[tfidf_norm]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_norm.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/tfidf_norm.png)
 
 ### Python Example
 
@@ -782,8 +766,7 @@ What will you do? You have hunderds of thousands of data points and quite a few 
 It is a classification technique based on Bayes’ Theorem with an assumption of independence among predictors. In simple terms, a Naive Bayes classifier assumes that the presence of a particular feature in a class is __*unrelated*__ to the presence of any other feature. For example, a fruit may be considered to be an apple if it is red, round, and about 3 inches in diameter. Even if these features depend on each other or upon the existence of the other features, all of these properties independently contribute to the probability that this fruit is an apple and that is why it is known as ‘Naive’.
 
 Bayes theorem provides a way of calculating posterior probability P(c|x) from P(c), P(x) and P(x|c). Look at the equation below:
-![alt text][Bayes_theory]
-[Bayes_theory]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/Bayes_rule.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/Bayes_rule.png)
 
  > * P(c|x) is the posterior probability of class (c, target) given predictor (x, attributes).
  > * P(c) is the prior probability of class.
@@ -802,8 +785,7 @@ Let’s understand it using an example. Below I have a training data set of weat
 * Example problem: will we play in sunny?
 We can solve it using above discussed method of posterior probability.
 
-![alt text][NB_example]
-[NB_example]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/Bayes_example.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/Bayes_example.png)
 
 P(Yes | Sunny) = P( Sunny | Yes) * P(Yes) / P (Sunny)
 
@@ -923,8 +905,7 @@ Actually, “ensembling, boosting, bagging” won’t help since their purpose i
 
  > LDA can be described as:
 
-![alt text][lda]
-[lda]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda.png)
 
  > LDA Algorithm in details
 
@@ -932,31 +913,26 @@ Let's go through details:
 
 * initilize the parameter
 
-![alt text][lda_init]
-[lda_init]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_init.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_init.png)
 
 * initilize the topic assignments randomly
 
-![alt text][lda_init_2]
-[lda_init_2]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_init_2.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_init_2.png)
 
 * iterate
 
-![alt text][lda_iterate]
-[lda_iterate]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_iterate.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_iterate.png)
 
 * Resample topic for word, given all other words and their current topic assignments
 
     * Which topics occur in this document?
     * Which topics like the word X?
 
-![alt text][lda_resample]
-[lda_resample]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_resample.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_resample.png)
 
 * Get results
 
-![alt text][lda_results]
-[lda_results]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_results.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_results.png)
 
 * Evaluate model
 
@@ -974,15 +950,13 @@ For each trained topic, take first ten words, substitute one of them with anothe
 Subjects are shown the title and a snippet from a document. Along with the document they are presented with four topics. Three of those topics are the highest probability topics assigned to that document. The remaining intruder topic is chosen randomly from the other low-probability topics in the model
 
  
-![alt text][lda_eva]
-[lda_eva]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_eva.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_eva.png)
 
 __*Metrics*__
 
 Cosine similarity: split each document into two parts, and check that topics of the first half are similar to topics of the second halves of different documents are mostly dissimilar
 
-![alt text][lda_metric]
-[lda_metric]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_metric.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/lda_metric.png)
 
 More Metrics [reference](http://mimno.infosci.cornell.edu/slides/details.pdf):
 
@@ -1035,28 +1009,23 @@ model.fit(X)  # model.fit_transform(X) is also available
 
 * Pipeline
 
-![alt text][pipeline]
-[pipeline]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/pipeline.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/pipeline.png)
 
 * Pre-Process
 
-![alt text][preprocess]
-[preprocess]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/preprocessing.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/preprocessing.png)
 
 * Vector Space
 
-![alt text][vector-space]
-[vector-space]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/vector-space.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/vector-space.png)
 
 * Gensim Model
 
-![alt text][gensim]
-[gensim]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/gensim.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/gensim.png)
 
 * Evaluation-Virtulization [LDAVis](https://github.com/cpsievert/LDAvis, https://github.com/bmabey/pyLDAvis)
 
-![alt text][ldavis]
-[ldavis]: https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/ldavis.png
+![alt text](https://github.com/zhangruiskyline/NLP_DeepLearning/blob/master/img/ldavis.png)
 
 * Topik
 
