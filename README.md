@@ -316,7 +316,7 @@ And what does it mean for two words to have similar contexts? I think you could 
 like “intelligent” and “smart” would have very similar contexts. Or that words that are related, 
 like “engine” and “transmission”, would probably have similar contexts as well.
 
-####Model Details
+### Model Details
 
 let’s say we have a vocabulary of 10,000 unique words.
 We’re going to represent an input word like “ants” as a one-hot vector. This vector will have 10,000 components (one for every word in our vocabulary) 
@@ -331,7 +331,7 @@ the training output is also a one-hot vector representing the output word.
 But when you evaluate the trained network on an input word, the output vector will actually be a probability distribution 
 (i.e., a bunch of floating point values, not a one-hot vector).
 
-#### Hidden layer
+### Hidden layer
 
 For our example, we’re going to say that we’re learning word vectors with 300 features. 
 So the hidden layer is going to be represented by a weight matrix with 10,000 rows 
@@ -350,7 +350,7 @@ This means that the hidden layer of this model is really just operating as a loo
 The output of the hidden layer is just the “word vector” for the input word.
 ![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png)
 
-####Output
+### Output
 
 The __*1 x 300*__ word vector for “ants” then gets fed to the output layer. 
 The output layer is a softmax regression classifier. 
@@ -362,7 +362,7 @@ we divide this result by the sum of the results from all 10,000 output nodes.
 
 ![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png)
 
-###skip gram model in real 
+### skip gram model in real 
 
 In our example, we only use one word to predict its pair word. In real application, we use one word to predict multiple context words.
 On the output layer, instead of outputing one multinomial distribution, we are outputing C multinomial distributions. Each output is computed using the same hidden→output i
@@ -370,7 +370,7 @@ is the same matrix:
 
 ![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png)
 
-###Intuition
+### Intuition
 
 If two different words have very similar “contexts” (that is, what words are likely to appear around them), then our model needs to output very similar results for these two words. 
 And one way for the network to output similar context predictions for these two words is if the word vectors are similar.
@@ -380,7 +380,8 @@ And what does it mean for two words to have similar contexts? I think you could 
 like “engine” and “transmission”, would probably have similar contexts as well.
 Here’s an illustration of calculating the output of the output neuron for the word “car”.
 
-###Negative sampling
+### Negative sampling
+
 > * Besides the positive training data(in skip gram, it is surrounding context), we need to have negative data
 to train the network so that unncessary context will be used for punishment. 
 > * However, if we tell the network *ALL* not in target words, will be too much,
@@ -401,6 +402,7 @@ The paper says that selecting 5-20 words works well for smaller datasets, and yo
 * If a word apprears a lot, but not in context, we want to give away
 
 ### Cost function with negative sampling
+
 The Cost function will include both the context and negative sampling
 ![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_cost_func.png)
 
