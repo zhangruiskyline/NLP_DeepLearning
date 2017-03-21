@@ -348,8 +348,7 @@ we can take a look at this in another way:
 
 This means that the hidden layer of this model is really just operating as a lookup table. 
 The output of the hidden layer is just the “word vector” for the input word.
-![alt text][matrix]
-[matrix]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png "example to use word2vec"
+![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png)
 
 ####Output
 
