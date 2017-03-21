@@ -250,8 +250,7 @@ example: consider each paragraph a document(not sentence otherwise training time
 * CBOW(Continuous Bag of Words): predict target word from a bag of words. CBOW is trained to predict the target word t from the contextual words that surround it
 * Skip Gram: predict target words from bag of words(position independent). The direction of the prediction is simply inverted, predicting the context given a word
 
-![alt text][CBOW_and_skip_gram]
-[CBOW_and_skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW_and_Skip_gram.png
+![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW_and_Skip_gram.png)
 
 > * CBOW: Fast to train than the skip-gram, slightly better accuracy for the frequent words
 CBOW is good at syntatic learning 
@@ -286,8 +285,8 @@ Both of these layers would have a weight matrix with 300 x 10,000 = 3 million we
 
 ## Continuous Bag of Words (CBOW)
 The mode of CBOW can be shown as following:
-![alt text][CBOW]
-[CBOW]:https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW.png
+
+![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/CBOW.png)
 
 we can see that for *C* context words, there will be *C* input vectors and output will be the predicting word, which is calculated 
 by the average of all input vectors
@@ -304,8 +303,8 @@ We’ll train the neural network to do this by feeding it word pairs found in ou
 The below example shows some of the training samples (word pairs) we would take from the sentence 
 “The quick brown fox jumps over the lazy dog.” I’ve used a small window size of 2 just for the example. 
 The word highlighted in blue is the input word.
-![alt text][word_pair]
-[word_pair]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/training_data.png "word pair train"
+
+![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/training_data.png) "word pair train"
 
 If two different words have very similar “contexts” (that is, what words are likely to appear around them), 
 then our model needs to output very similar results for these two words. And one way for the network to output similar 
@@ -323,8 +322,7 @@ and we’ll place a “1” in the position corresponding to the word “ants”
 
 The output of the network is a single vector (also with 10,000 components) containing, for every word in our vocabulary, 
 the probability that a randomly selected nearby word is that vocabulary word.
-![alt text][NN_structure]
-[NN_structure]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_net_arch.png "Network structure"
+![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram_net_arch.png) 
 
 When training this network on word pairs, the input is a one-hot vector representing the input word and 
 the training output is also a one-hot vector representing the output word. 
