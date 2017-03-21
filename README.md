@@ -341,8 +341,7 @@ the output layer we’ll just toss when we’re done!
 we can take a look at this in another way:
  If you multiply a 1 x 10,000 one-hot vector by a 10,000 x 300 matrix, 
  it will effectively just select the matrix row corresponding to the “1”. Here’s a small example to give you a visual.
- ![alt text][one_hot_example]
-[one_hot_example]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png "One hot vector x hidden word2vec"
+ ![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/word2vec_weight_matrix_lookup_table.png)
 
 This means that the hidden layer of this model is really just operating as a lookup table. 
 The output of the hidden layer is just the “word vector” for the input word.
@@ -358,8 +357,7 @@ Specifically, each output neuron has a weight vector which it multiplies against
 then it applies the function __*exp(x)*__ to the result. Finally, in order to get the outputs to sum up to 1, 
 we divide this result by the sum of the results from all 10,000 output nodes.
 
-![alt text][out_weight]
-[out_weight]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png
+![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png)
 
 ###skip gram model in real 
 In our example, we only use one word to predict its pair word. In real application, we use one word to predict multiple context words.
@@ -367,7 +365,7 @@ On the output layer, instead of outputing one multinomial distribution, we are o
 is the same matrix:
 
 ![alt text][skip_gram]
-[skip_gram]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png
+[skip_gram]:https://github.com/zhangruiskyline/NLP_demo/blob/master/img/skip_gram.png
 
 ###Intuition
 
