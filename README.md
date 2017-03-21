@@ -295,6 +295,7 @@ by the average of all input vectors
 ## The Skip-Gram Model
 
 ### Skip gram in example: word pairs
+
 Goal: We’re going to train the neural network to do the following. Given a specific word in the middle of a sentence (the input word), 
 look at the words nearby and pick one at random. The network is going to tell us the probability for every word in 
 our vocabulary of being the “nearby word” that we chose.
@@ -316,6 +317,7 @@ like “intelligent” and “smart” would have very similar contexts. Or that
 like “engine” and “transmission”, would probably have similar contexts as well.
 
 ####Model Details
+
 let’s say we have a vocabulary of 10,000 unique words.
 We’re going to represent an input word like “ants” as a one-hot vector. This vector will have 10,000 components (one for every word in our vocabulary) 
 and we’ll place a “1” in the position corresponding to the word “ants”, and 0s in all of the other positions.
@@ -330,6 +332,7 @@ But when you evaluate the trained network on an input word, the output vector wi
 (i.e., a bunch of floating point values, not a one-hot vector).
 
 #### Hidden layer
+
 For our example, we’re going to say that we’re learning word vectors with 300 features. 
 So the hidden layer is going to be represented by a weight matrix with 10,000 rows 
 (one for every word in our vocabulary) and 300 columns (one for every hidden neuron).
@@ -349,6 +352,7 @@ The output of the hidden layer is just the “word vector” for the input word.
 [matrix]: https://github.com/zhangruiskyline/NLP_demo/blob/master/img/matrix_mult_w_one_hot.png "example to use word2vec"
 
 ####Output
+
 The __*1 x 300*__ word vector for “ants” then gets fed to the output layer. 
 The output layer is a softmax regression classifier. 
 but the gist of it is that each output neuron (one per word in our vocabulary!) 
@@ -360,6 +364,7 @@ we divide this result by the sum of the results from all 10,000 output nodes.
 ![alt text](https://github.com/zhangruiskyline/NLP_demo/blob/master/img/output_weights_function.png)
 
 ###skip gram model in real 
+
 In our example, we only use one word to predict its pair word. In real application, we use one word to predict multiple context words.
 On the output layer, instead of outputing one multinomial distribution, we are outputing C multinomial distributions. Each output is computed using the same hidden→output i
 is the same matrix:
