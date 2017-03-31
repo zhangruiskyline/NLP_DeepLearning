@@ -73,7 +73,7 @@ def my_tokenizer(s):
     return s.split()
 
 def get_wikipedia_data(n_files, n_vocab, by_paragraph=False):
-    prefix = '/Users/ruizhang/Documents/wiki_data/'
+    prefix = '/Users/ruizhang/Documents/NLP_dataset/'
     # input_files = [f for f in os.listdir(prefix) if f.startswith('enwiki') and f.endswith('txt')]
     input_files = [f for f in os.listdir(prefix) if f.startswith('enwiki') and f.endswith('txt')]
     # return variables
