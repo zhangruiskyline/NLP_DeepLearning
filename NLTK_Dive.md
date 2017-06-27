@@ -1,3 +1,21 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Part 2: Sentence Tokenize and Word Tokenize](#part-2-sentence-tokenize-and-word-tokenize)
+- [Part 3: Part-Of-Speech Tagging and POS Tagger](#part-3-part-of-speech-tagging-and-pos-tagger)
+  - [Example to train TnT POS Tagger Model](#example-to-train-tnt-pos-tagger-model)
+- [Part 4: Stemming and Lemmatization](#part-4-stemming-and-lemmatization)
+  - [Stemmer in NLTK](#stemmer-in-nltk)
+  - [How to use Lemmatizer in NLTK](#how-to-use-lemmatizer-in-nltk)
+- [Part 5 Using Stanford Text Analysis Tools in Python](#part-5-using-stanford-text-analysis-tools-in-python)
+  - [POS Tagger](#pos-tagger)
+  - [NER](#ner)
+  - [Stanford Word Segmenter](#stanford-word-segmenter)
+- [Part 6:  Text Classification](#part-6--text-classification)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 #Part 1: Getting Started with NLTK
 
 Referring to [dive to NLTK](http://textminingonline.com/dive-into-nltk-part-i-getting-started-with-nltk)
