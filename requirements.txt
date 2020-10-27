@@ -26,7 +26,7 @@ conda==4.3.9
 configobj==5.0.6
 constantly==15.1.0
 contextlib2==0.5.4
-cryptography==1.7.1
+cryptography==3.2
 cssselect==1.0.0
 cycler==0.10.0
 Cython==0.25.2
