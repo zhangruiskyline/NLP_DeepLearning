@@ -41,7 +41,7 @@ elasticsearch-dsl==5.1.0
 et-xmlfile==1.0.1
 fastcache==1.0.2
 Flask==0.12
-Flask-Cors==3.0.2
+Flask-Cors==3.0.9
 future==0.16.0
 gensim==0.13.4.1
 gevent==1.2.1
